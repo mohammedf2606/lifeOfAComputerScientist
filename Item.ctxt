@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Item
+comment0.text=\n\ Class\ Item\ -\ an\ item\ in\ a\ room\n\n\ @author\ Fahim\ Mohammed\n\ @version\ 2018.11.14\n
+comment1.params=name\ description\ weight
+comment1.target=Item(java.lang.String,\ java.lang.String,\ int)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Item\n
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment2.text=\n\ @return\ The\ name\ of\ the\ item\n\ (the\ one\ that\ was\ defined\ in\ the\ constructor).\n
+comment3.params=
+comment3.target=int\ getWeight()
+comment3.text=\n\ Returns\ the\ weight\ of\ the\ current\ item\n\n\ @return\ \ \ \ weight\ of\ the\ item\n
+comment4.params=
+comment4.target=java.lang.String\ getShortDescription()
+comment4.text=\n\ @return\ The\ short\ description\ of\ the\ item\n\ (the\ one\ that\ was\ defined\ in\ the\ constructor).\n
+comment5.params=
+comment5.target=java.lang.String\ getLongDescription()
+comment5.text=\n\ Return\ a\ description\ of\ the\ item\ in\ the\ form\:\n\ \ \ \ \ This\ is\ a\ potato.\n\ @return\ A\ long\ description\ of\ this\ item\n
+numComments=6

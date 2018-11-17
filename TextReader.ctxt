@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=TextReader
+comment0.text=\n\ Reads\ the\ story\ from\ a\ text\ file\ and\ sets\ up\ the\ rooms\ using\ the\ text\ file\n\n\ @author\ Fahim\ Mohammed\n\ @version\ 2018.11.12\n
+comment1.params=command
+comment1.target=TextReader(java.lang.String)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ TextReader\n
+comment2.params=
+comment2.target=void\ reader()
+comment2.text=\n\ Prints\ out\ each\ line\ of\ the\ text\ document\ with\ the\ story\n\ If\ an\ exception\ is\ raised,\ it\ is\ passed\ for\ exception\ handling\n
+comment3.params=e
+comment3.target=void\ exceptionHandling(java.lang.Exception)
+comment3.text=\n\ If\ any\ exceptions\ are\ detected,\ they\ are\ classified\ here\n
+numComments=4

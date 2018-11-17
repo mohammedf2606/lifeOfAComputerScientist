@@ -1,0 +1,12 @@
+
+You are a first-year student studying Computer Science.
+You need to successfully graduate from this year.
+
+You can do this by attending lectures, small group tutorials, and practical labs.
+This will give you INT (Intelligence points).
+The more INT you have, the more likely you are to pass your exams.
+Having certain objects can increase how much INT you can get from attending events and some items have special properties too.
+
+But remember, you must submit your courseworks in time or you will fail.
+
+Your command words are:
