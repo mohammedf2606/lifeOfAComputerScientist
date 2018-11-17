@@ -1,7 +1,4 @@
-import java.util.Stack;
-import java.util.Random;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 /**
  *  This class is the main class of the "World of Zuul" application.
@@ -29,7 +26,7 @@ public class Game
     private ArrayList<Room> roomList;
     private Stack<Room> backStack;
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppa, ela, coffee, computer, elaCW, ppaCW, notebook, drink, printer;
+    private Item ppa, ela, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack;
 
     /**
      * Create the game and initialise its internal map.
@@ -118,6 +115,7 @@ public class Game
         notebook = new Item("notebook","your notebook",400);
         drink = new Item("beer","a pint of beer", 300);
         printer = new Item("printer","a printer", 0);
+        backpack = new Item("backpack", "a bigger backpack", 1);
 
         library.addItem(ppa);
         library.addItem(ela);

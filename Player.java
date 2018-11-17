@@ -2,8 +2,8 @@ import java.util.*;
 /**
  * Class Player - creates a player in the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Fahim Mohammed
+ * @version 2018.11.17
  */
 public class Player
 {
@@ -30,10 +30,19 @@ public class Player
         String itemName = command.getSecondWord();
         Item item = currentRoom.getItems().get(itemName);
         Integer weight = item.getWeight();
-        if (currentWeight + weight <= maxWeight) {
-            inventory.put(itemName, item);
-            currentWeight += weight;
-            System.out.println("Grabbed " + itemName);
+        if (itemName.equals("backpack")) {
+            maxWeight *= 2;
+            System.out.println("You just doubled how much you can carry. You can now carry "+ maxWeight/1000+ " kg.");
+        }
+        else if (currentWeight + weight <= maxWeight) {
+            if (weight == 0) {
+                System.out.println("You can't pick that up!");
+            }
+            else {
+                inventory.put(itemName, item);
+                currentWeight += weight;
+                System.out.println("Grabbed " + itemName);
+            }
         }
         else {
             System.out.println("No more space in bag. You gotta drop something...");
