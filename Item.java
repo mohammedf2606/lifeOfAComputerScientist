@@ -7,14 +7,14 @@
  */
 public class Item
 {
-    private int weight;
+    private Integer weight;
     private String description;
     private String name;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String name, String description, int weight)
+    public Item(String name, String description, Integer weight)
     {
        this.name = name;
        this.description = description;
@@ -35,7 +35,7 @@ public class Item
      *
      * @return    weight of the item
      */
-    public int getWeight()
+    public Integer getWeight()
     {
        return weight;
     }

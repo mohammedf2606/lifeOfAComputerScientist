@@ -23,7 +23,7 @@ import java.util.Collections;
 public class Game
 {
     private Parser parser;
-    private Room currentRoom;
+    private Player player;
     private Room previousRoom = null;
     private TextReader textReader;
     private ArrayList<Room> roomList;
@@ -36,6 +36,7 @@ public class Game
      */
     public Game()
     {
+        player = new Player(5000);
         roomList = new ArrayList<>();
         backStack = new Stack<>();
         createRooms();
@@ -100,7 +101,7 @@ public class Game
 
         createItems();
 
-        currentRoom = outside;  // start game outside
+        player.currentRoom = outside;  // start game outside
     }
 
     /**
@@ -108,14 +109,14 @@ public class Game
      */
     private void createItems()
     {
-        ppa = new Item("ppa","your PPA book", 12);
-        ela = new Item("ela","your ELA book", 10);
-        coffee = new Item("coffee","a cup of coffee", 3);
+        ppa = new Item("ppa","your PPA book", 1200);
+        ela = new Item("ela","your ELA book", 1000);
+        coffee = new Item("coffee","a cup of coffee", 300);
         computer = new Item("computer","a lab computer", 0);
-        elaCW = new Item("elaCW","your completed ELA coursework", 5);
-        ppaCW = new Item("ppaCW","your completed PPA coursework", 5);
-        notebook = new Item("notebook","your notebook", 7);
-        drink = new Item("beer","a pint of beer", 3);
+        elaCW = new Item("elaCW","your completed ELA coursework", 200);
+        ppaCW = new Item("ppaCW","your completed PPA coursework", 200);
+        notebook = new Item("notebook","your notebook",400);
+        drink = new Item("beer","a pint of beer", 300);
         printer = new Item("printer","a printer", 0);
 
         library.addItem(ppa);
@@ -156,7 +157,7 @@ public class Game
     {
         textReader = new TextReader(null);
         textReader.reader();
-        System.out.println(currentRoom.getLongDescription());
+        look();
     }
 
     /**
@@ -186,8 +187,17 @@ public class Game
         else if (commandWord.equals("back")) {
             goBack();
         }
-        else if (commandWord.equals("grab")) {
-            
+        else if (commandWord.equals("look")) {
+            look();
+        }
+        else if (commandWord.equals("take")) {
+            player.takeItem(command);
+        }
+        else if (commandWord.equals("drop")) {
+            player.dropItem(command);
+        }
+        else if (commandWord.equals("items")) {
+            System.out.println(player.getInventory());
         }
         // else command not recognised.
         return wantToQuit;
@@ -213,8 +223,8 @@ public class Game
     private void goBack()
     {
         if (backStack.empty() != true) {
-            currentRoom = backStack.pop();
-            System.out.println(currentRoom.getLongDescription());
+            player.currentRoom = backStack.pop();
+            look();
         }
         
         else {
@@ -222,6 +232,14 @@ public class Game
         }
     }
 
+    /**
+     * 
+     */
+    private void look()
+    {
+        System.out.println("\n" + player.currentRoom.getLongDescription());
+    }
+    
     /**
      * Try to in to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -237,7 +255,7 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.currentRoom.getExit(direction);
         Random randomizer = new Random();
 
         if (nextRoom == null) {
@@ -250,21 +268,13 @@ public class Game
                     nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
                 }
             }
-            previousRoom = currentRoom;
+            previousRoom = player.currentRoom;
             backStack.push(previousRoom);
-            currentRoom = nextRoom;
-            System.out.println("\n" + currentRoom.getLongDescription());
+            player.currentRoom = nextRoom;
+            look();
         }
     }
-
-    /**
-     * Looks at the current item and carries out the appropriate action for it
-     */
-    private void itemCommands(Command command)
-    {
-        
-    }
-    
+  
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
