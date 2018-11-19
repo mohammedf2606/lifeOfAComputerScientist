@@ -203,7 +203,7 @@ public class Game
             System.out.println(player.getInventory());
             break;
           case "time":
-
+            Time.showTime(turns);
             break;
           case "timetable":
             showTimetable();
