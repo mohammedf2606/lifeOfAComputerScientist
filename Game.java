@@ -175,27 +175,23 @@ public class Game
     {
         boolean wantToQuit = false;
         String commandWord = command.getCommandWord();
-        if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
-        }
-
-
         switch (commandWord) {
             case "help": printHelp();
             case "go": goRoom(command);
-            case "quit": wantToQuit = quit(command);
+            case "quit":
+              wantToQuit = quit(command);
+              return wantToQuit;
             case "back": goBack(command);
             case "look": look();
             case "take": player.takeItem(command);
             case "drop": player.dropItem(command);
             case "items": System.out.println(player.getInventory());
             case "time":
-            case "timetable"
-
+            case "timetable":
+            default:
+              System.out.println("I don't know what you mean...");
+              return false;
         }
-       // else command not recognised.
-        return wantToQuit;
     }
 
     // implementations of user commands:
