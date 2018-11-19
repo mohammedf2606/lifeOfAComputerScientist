@@ -1,7 +1,7 @@
 import java.io.*;
 
 /**
- * Reads the story from a text file and sets up the rooms using the text file
+ * Reads the story from a text file
  *
  * @author Fahim Mohammed
  * @version 2018.11.12

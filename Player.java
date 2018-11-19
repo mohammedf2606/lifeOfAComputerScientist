@@ -20,7 +20,6 @@ public class Player
     {
         this.maxWeight = maxWeight;
         inventory = new HashMap<>();
-        itemSet = currentRoom.getItems().keySet();
     }
 
     /**
@@ -62,6 +61,7 @@ public class Player
     public void dropItem(Command command)
     {
       String itemName = command.getSecondWord();
+      Set<String> itemSet = currentRoom.getItems().keySet();
       if (! itemSet.contains(itemName)) {
         System.out.println("Drop what?");
       }
@@ -86,10 +86,6 @@ public class Player
             maxWeight *= 2;
             System.out.println("You doubled the maximum weight you can carry. You can now carry " + maxWeight/1000 + " kg.");
           case "computer":
-            if () {
-
-            }
-
 
         }
       }

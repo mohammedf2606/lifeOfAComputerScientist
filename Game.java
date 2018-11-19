@@ -27,7 +27,7 @@ public class Game
     private ArrayList<Room> roomList;
     private Stack<Room> backStack;
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppa, ela, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack, food;
+    private Item ppaBook, elaBook, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack, food;
 
     /**
      * Create the game and initialise its internal map.
@@ -107,8 +107,8 @@ public class Game
      */
     private void createItems()
     {
-        ppa = new Item("ppa","your PPA book", 1200);
-        ela = new Item("ela","your ELA book", 1000);
+        ppaBook = new Item("PPABook","your PPA book", 1200);
+        elaBook = new Item("ELABook","your ELA book", 1000);
         coffee = new Item("coffee","a cup of coffee", 300);
         computer = new Item("computer","a lab computer", 0);
         elaCW = new Item("elaCW","your completed ELA coursework", 200);
@@ -133,7 +133,7 @@ public class Game
 
         kitchen.addItem(food);
 
-        theatre.addItem(backpack)
+        theatre.addItem(backpack);
     }
 
     /**
@@ -150,7 +150,7 @@ public class Game
 
         while (! finished) {
             Command command = parser.getCommand();
-            finished = processCommand(command);int turns = 0;
+            finished = processCommand(command);
             turns += 1;
         }
         System.out.println("Thank you for playing. Good bye.");
@@ -174,32 +174,24 @@ public class Game
     private boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
-
+        String commandWord = command.getCommandWord();
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
         }
 
-        String commandWord = command.getCommandWord();
+
         switch (commandWord) {
-          case "help":
-            printHelp();
-          case "go":
-            goRoom(command);
-          case "quit":
-            wantToQuit = quit(command);
-          case "back":
-            goBack();
-          case "look":
-            look();
-          case "take":
-            player.takeItem(command);
-          case "drop":
-            player.dropItem(command);
-          case "items":
-            System.out.println(player.getInventory());
-          case "time":
-            
+            case "help": printHelp();
+            case "go": goRoom(command);
+            case "quit": wantToQuit = quit(command);
+            case "back": goBack(command);
+            case "look": look();
+            case "take": player.takeItem(command);
+            case "drop": player.dropItem(command);
+            case "items": System.out.println(player.getInventory());
+            case "time":
+
 
         }
        // else command not recognised.
@@ -223,13 +215,15 @@ public class Game
     /**
      * Try to go to the previous room, else error message.
      */
-    private void goBack()
+    private void goBack(Command command)
     {
         if (backStack.empty() != true) {
             player.currentRoom = backStack.pop();
             look();
         }
+        else if (false) {
 
+        }
         else {
             System.out.println("You are back to the start!");
         }
