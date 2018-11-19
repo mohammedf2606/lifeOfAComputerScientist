@@ -174,7 +174,7 @@ public class Game
     private boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
-        
+
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
@@ -199,7 +199,7 @@ public class Game
           case "items":
             System.out.println(player.getInventory());
           case "time":
-
+            
 
         }
        // else command not recognised.
