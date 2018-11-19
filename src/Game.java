@@ -203,7 +203,7 @@ public class Game
             System.out.println(player.getInventory());
             break;
           case "time":
-            
+
             break;
           case "timetable":
             showTimetable();
@@ -225,9 +225,9 @@ public class Game
      */
     private void printHelp()
     {
-        textReader = new TextReader("help");
-        textReader.reader();
-        parser.showCommands();
+      textReader = new TextReader("help");
+      textReader.reader();
+      parser.showCommands();
     }
 
     /**
@@ -235,16 +235,13 @@ public class Game
      */
     private void goBack(Command command)
     {
-        if (backStack.empty() != true) {
-            player.currentRoom = backStack.pop();
-            look();
-        }
-        else if (false) {
-
-        }
-        else {
-            System.out.println("You are back to the start!");
-        }
+      if (backStack.empty() != true) {
+        player.currentRoom = backStack.pop();
+        look();
+      }
+      else {
+        System.out.println("You are back to the start!");
+      }
     }
 
     /**
@@ -291,13 +288,12 @@ public class Game
     }
 
     /**
-     *
+     * Reads timetable text file and prints to terminal
      */
     private void showTimetable() {
       textReader = new TextReader("timetable");
       textReader.reader();
     }
-
 
     /**
      * "Quit" was entered. Check the rest of the command to see
