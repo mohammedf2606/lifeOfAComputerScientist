@@ -148,7 +148,7 @@ public class Game
 
         boolean finished = false;
 
-        while (! finished) {
+        while (! finished && turns != 200) {
             Command command = parser.getCommand();
             finished = processCommand(command);
             turns += 1;
@@ -175,8 +175,9 @@ public class Game
     {
         boolean wantToQuit = false;
         String commandWord = command.getCommandWord();
+        System.out.println(commandWord);
         if (commandWord != null) {
-          switch (commandWord) {
+          switch (commandWord.toLowerCase()) {
               case "help":
                 printHelp();
                 break;
@@ -299,6 +300,10 @@ public class Game
         if(command.hasSecondWord()) {
             System.out.println("Quit what?");
             return false;
+        }
+        else if (turns == 200) {
+          textReader = new TextReader("turn");
+          textReader.reader();
         }
         else {
             return true;  // signal that we want to quit

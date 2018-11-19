@@ -19,40 +19,45 @@ public class TextReader
     public TextReader(String command)
     {
         try {
-            if (command == "help") {
+            switch (command) {
+              case "help":
                 fileName = "help.txt";
-            }
-            if (command == null) {
+                break;
+              case null:
                 fileName = "intro.txt";
+                break;
+              case "turn"
+                fileName = "failEndTurns.txt";
+                break;
             }
             fileReader = new FileReader(fileName);
-            bufferedReader = new BufferedReader(fileReader); 
+            bufferedReader = new BufferedReader(fileReader);
         }
         catch(Exception e) {
             exceptionHandling(e);
         }
     }
-        
+
     /**
      * Prints out each line of the text document with the story
      * If an exception is raised, it is passed for exception handling
-     */ 
+     */
     public void reader()
     {
         try {
             while((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
-         
+
             // Always close files.
             bufferedReader.close();
         }
-        
+
         catch(Exception e) {
             exceptionHandling(e);
         }
     }
-        
+
     /**
      * If any exceptions are detected, they are classified here
      */
@@ -60,9 +65,9 @@ public class TextReader
         if(e instanceof FileNotFoundException) {
             System.out.println("Unable to open file '" + fileName + "'");
         }
-        
+
         if(e instanceof IOException) {
-            System.out.println("Error reading file '" + fileName + "'");   
+            System.out.println("Error reading file '" + fileName + "'");
         }
     }
 }
