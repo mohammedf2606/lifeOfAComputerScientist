@@ -19,16 +19,24 @@ public class TextReader
     public TextReader(String command)
     {
         try {
-            switch (command) {
-              case "help":
-                fileName = "help.txt";
-                break;
-              case null:
+            if (command == null) {
                 fileName = "intro.txt";
-                break;
-              case "turn"
-                fileName = "failEndTurns.txt";
-                break;
+            }
+            else {
+                switch (command) {
+                  case "help":
+                    fileName = "help.txt";
+                    break;
+                  case "turn":
+                    fileName = "failEndTurns.txt";
+                    break;
+                  case "timetable":
+                    fileName = "timetable.txt";
+                    break;
+                  case "time":
+                    fileName = "time.txt";
+                    break;
+                }
             }
             fileReader = new FileReader(fileName);
             bufferedReader = new BufferedReader(fileReader);

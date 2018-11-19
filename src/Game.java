@@ -141,19 +141,19 @@ public class Game
      */
     public void play()
     {
-        printWelcome();
+      printWelcome();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
+      // Enter the main command loop.  Here we repeatedly read commands and
+      // execute them until the game is over.
 
-        boolean finished = false;
+      boolean finished = false;
 
-        while (! finished && turns != 200) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
-            turns += 1;
-        }
-        System.out.println("Thank you for playing. Good bye.");
+      while (! finished && turns != 200) {
+        Command command = parser.getCommand();
+        finished = processCommand(command);
+        turns += 1;
+      }
+      System.out.println("Thank you for playing. Good bye.");
     }
 
     /**
@@ -161,9 +161,9 @@ public class Game
      */
     private void printWelcome()
     {
-        textReader = new TextReader(null);
-        textReader.reader();
-        look();
+      textReader = new TextReader(null);
+      textReader.reader();
+      look();
     }
 
     /**
@@ -173,47 +173,47 @@ public class Game
      */
     private boolean processCommand(Command command)
     {
-        boolean wantToQuit = false;
-        String commandWord = command.getCommandWord();
-        System.out.println(commandWord);
-        if (commandWord != null) {
-          switch (commandWord.toLowerCase()) {
-              case "help":
-                printHelp();
-                break;
-              case "go":
-                goRoom(command);
-                break;
-              case "quit":
-                wantToQuit = quit(command);
-                return wantToQuit;
-              case "back":
-                goBack(command);
-                break;
-              case "look":
-                look();
-                break;
-              case "take":
-                player.takeItem(command);
-                break;
-              case "drop":
-                player.dropItem(command);
-                break;
-              case "items":
-                System.out.println(player.getInventory());
-                break;
-              case "time":
-
-                break;
-              case "timetable":
-
-                break;
-          }
+      boolean wantToQuit = false;
+      String commandWord = command.getCommandWord();
+      System.out.println(commandWord);
+      if (commandWord != null) {
+        switch (commandWord) {
+          case "help":
+            printHelp();
+            break;
+          case "go":
+            goRoom(command);
+            break;
+          case "quit":
+            wantToQuit = quit(command);
+            return wantToQuit;
+          case "back":
+            goBack(command);
+            break;
+          case "look":
+            look();
+            break;
+          case "take":
+            player.takeItem(command);
+            break;
+          case "drop":
+            player.dropItem(command);
+            break;
+          case "items":
+            System.out.println(player.getInventory());
+            break;
+          case "time":
+            
+            break;
+          case "timetable":
+            showTimetable();
+            break;
         }
-        else {
-          System.out.println("I don't know what you mean...");
-        }
-        return false;
+      }
+      else {
+        System.out.println("I don't know what you mean...");
+      }
+      return false;
     }
 
     // implementations of user commands:
@@ -291,22 +291,32 @@ public class Game
     }
 
     /**
+     *
+     */
+    private void showTimetable() {
+      textReader = new TextReader("timetable");
+      textReader.reader();
+    }
+
+
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
      */
     private boolean quit(Command command)
     {
-        if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
-            return false;
-        }
-        else if (turns == 200) {
-          textReader = new TextReader("turn");
-          textReader.reader();
-        }
-        else {
-            return true;  // signal that we want to quit
-        }
+      if(command.hasSecondWord()) {
+        System.out.println("Quit what?");
+        return false;
+      }
+      else if (turns == 200) {
+        textReader = new TextReader("turn");
+        textReader.reader();
+        return true;
+      }
+      else {
+        return true;  // signal that we want to quit
+      }
     }
 }
