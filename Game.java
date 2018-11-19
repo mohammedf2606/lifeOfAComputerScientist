@@ -22,11 +22,12 @@ public class Game
     private Parser parser;
     private Player player;
     private Room previousRoom = null;
+    private int turns = 0;
     private TextReader textReader;
     private ArrayList<Room> roomList;
     private Stack<Room> backStack;
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppa, ela, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack;
+    private Item ppa, ela, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack, food;
 
     /**
      * Create the game and initialise its internal map.
@@ -116,18 +117,23 @@ public class Game
         drink = new Item("beer","a pint of beer", 300);
         printer = new Item("printer","a printer", 0);
         backpack = new Item("backpack", "a bigger backpack", 1);
+        food = new Item("food", "some food", 400);
 
         library.addItem(ppa);
         library.addItem(ela);
 
         arcade.addItem(coffee);
-        
+
         lab.addItem(computer);
         lab.addItem(printer);
         lab.addItem(elaCW);
         lab.addItem(ppaCW);
-        
+
         pub.addItem(drink);
+
+        kitchen.addItem(food);
+
+        theatre.addItem(backpack)
     }
 
     /**
@@ -141,9 +147,11 @@ public class Game
         // execute them until the game is over.
 
         boolean finished = false;
+
         while (! finished) {
             Command command = parser.getCommand();
-            finished = processCommand(command);
+            finished = processCommand(command);int turns = 0;
+            turns += 1;
         }
         System.out.println("Thank you for playing. Good bye.");
     }
@@ -166,38 +174,35 @@ public class Game
     private boolean processCommand(Command command)
     {
         boolean wantToQuit = false;
-
+        
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
             return false;
         }
 
         String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+        switch (commandWord) {
+          case "help":
             printHelp();
-        }
-        else if (commandWord.equals("go")) {
+          case "go":
             goRoom(command);
-        }
-        else if (commandWord.equals("quit")) {
+          case "quit":
             wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("back")) {
+          case "back":
             goBack();
-        }
-        else if (commandWord.equals("look")) {
+          case "look":
             look();
-        }
-        else if (commandWord.equals("take")) {
+          case "take":
             player.takeItem(command);
-        }
-        else if (commandWord.equals("drop")) {
+          case "drop":
             player.dropItem(command);
-        }
-        else if (commandWord.equals("items")) {
+          case "items":
             System.out.println(player.getInventory());
+          case "time":
+
+
         }
-        // else command not recognised.
+       // else command not recognised.
         return wantToQuit;
     }
 
@@ -224,20 +229,20 @@ public class Game
             player.currentRoom = backStack.pop();
             look();
         }
-        
+
         else {
             System.out.println("You are back to the start!");
         }
     }
 
     /**
-     * 
+     * Prints what is in the current room and the room's description
      */
     private void look()
     {
         System.out.println("\n" + player.currentRoom.getLongDescription());
     }
-    
+
     /**
      * Try to in to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
@@ -272,7 +277,7 @@ public class Game
             look();
         }
     }
-  
+
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
