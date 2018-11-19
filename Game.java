@@ -119,8 +119,8 @@ public class Game
         backpack = new Item("backpack", "a bigger backpack", 1);
         food = new Item("food", "some food", 400);
 
-        library.addItem(ppa);
-        library.addItem(ela);
+        library.addItem(ppaBook);
+        library.addItem(elaBook);
 
         arcade.addItem(coffee);
 
@@ -191,7 +191,7 @@ public class Game
             case "drop": player.dropItem(command);
             case "items": System.out.println(player.getInventory());
             case "time":
-
+            case "timetable"
 
         }
        // else command not recognised.
