@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Time
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Time\ here.\r\n\r\n\ @author\ Fahim\ Mohammed\r\n\ @version\ 2018.11.19\r\n
+comment1.params=
+comment1.target=Time()
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Time\r\n
+comment2.params=turns
+comment2.target=void\ showTime(int)
+comment2.text=\r\n\ Shows\ the\ current\ time\ to\ the\ user\r\n
+comment3.params=e
+comment3.target=void\ exceptionHandling(java.lang.Exception)
+comment3.text=\r\n\ If\ any\ exceptions\ are\ detected,\ they\ are\ classified\ here\r\n
+numComments=4

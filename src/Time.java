@@ -13,6 +13,7 @@ public class Time
   private String fileName = "";
   private FileReader fileReader;
   private BufferedReader bufferedReader;
+  private String line = null;
 
   /**
    * Constructor for objects of class Time
@@ -33,7 +34,12 @@ public class Time
   public void showTime(int turns)
   {
     int currentTimeIndex = Math.round(turns / 10);
-
+    int index = 0;
+    while (index != currentTimeIndex) {
+      line = BufferedReader.readLines();
+      index++;
+    }
+    System.out.println(line);
   }
 
   /**

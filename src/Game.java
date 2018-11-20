@@ -173,9 +173,9 @@ public class Game
      */
     private boolean processCommand(Command command)
     {
+      Time time = new Time();
       boolean wantToQuit = false;
       String commandWord = command.getCommandWord();
-      System.out.println(commandWord);
       if (commandWord != null) {
         switch (commandWord) {
           case "help":
@@ -203,7 +203,7 @@ public class Game
             System.out.println(player.getInventory());
             break;
           case "time":
-            Time.showTime(turns);
+            time.showTime(turns);
             break;
           case "timetable":
             showTimetable();
@@ -258,33 +258,33 @@ public class Game
      */
     private void goRoom(Command command)
     {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
+      if(!command.hasSecondWord()) {
+          // if there is no second word, we don't know where to go...
+          System.out.println("Go where?");
+          return;
+      }
 
-        String direction = command.getSecondWord();
+      String direction = command.getSecondWord();
 
-        // Try to leave current room.
-        Room nextRoom = player.currentRoom.getExit(direction);
-        Random randomizer = new Random();
+      // Try to leave current room.
+      Room nextRoom = player.currentRoom.getExit(direction);
+      Random randomizer = new Random();
 
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            if (nextRoom.getName().equals("random")) {
-                System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
-                while (nextRoom.getName().equals("random")) {
-                    nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
-                }
-            }
-            previousRoom = player.currentRoom;
-            backStack.push(previousRoom);
-            player.currentRoom = nextRoom;
-            look();
-        }
+      if (nextRoom == null) {
+          System.out.println("There is no door!");
+      }
+      else {
+          if (nextRoom.getName().equals("random")) {
+              System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
+              while (nextRoom.getName().equals("random")) {
+                  nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
+              }
+          }
+          previousRoom = player.currentRoom;
+          backStack.push(previousRoom);
+          player.currentRoom = nextRoom;
+          look();
+      }
     }
 
     /**
