@@ -156,7 +156,7 @@ public class Game
           finished = quit(null);
         }
       }
-      System.out.println("Thank you for playing. Good bye.");
+      System.out.println("\nThank you for playing. Good bye.");
     }
 
     /**
@@ -191,7 +191,7 @@ public class Game
             wantToQuit = quit(command);
             return wantToQuit;
           case "back":
-            goBack(command);
+            goBack();
             break;
           case "look":
             look();
@@ -236,7 +236,7 @@ public class Game
     /**
      * Try to go to the previous room, else error message.
      */
-    private void goBack(Command command)
+    private void goBack()
     {
       if (backStack.empty() != true) {
         player.currentRoom = backStack.pop();
