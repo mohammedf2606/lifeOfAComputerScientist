@@ -35,11 +35,16 @@ public class Time
   {
     int currentTimeIndex = Math.round(turns / 10);
     int index = 0;
-    while (index != currentTimeIndex) {
-      line = BufferedReader.readLines();
-      index++;
+    try {
+      while (index != currentTimeIndex) {
+        line = bufferedReader.readLine();
+        index++;
+      }
+      System.out.println("Commands used: " + turns);
+      System.out.println(line);
+    } catch(Exception e) {
+      exceptionHandling(e);
     }
-    System.out.println(line);
   }
 
   /**
