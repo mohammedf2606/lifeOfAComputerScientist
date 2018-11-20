@@ -41,7 +41,7 @@ public class Player
           Integer weight = item.getWeight();
           if (itemName.equals("backpack")) {
               System.out.println("Looks like someone left their bag after the lecture. It's bigger than yours.");
-              System.out.println("Maybe you can make USE of it...");
+              System.out.println("Maybe you can make USE of it...\n");
           }
           else if (currentWeight + weight <= maxWeight) {
               if (weight == 0) {
@@ -90,7 +90,7 @@ public class Player
             maxWeight *= 2;
             System.out.println("You doubled the maximum weight you can carry. You can now carry " + maxWeight/1000 + " kg.");
           case "computer":
-            
+
         }
       }
     }
