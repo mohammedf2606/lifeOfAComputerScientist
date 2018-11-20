@@ -152,7 +152,7 @@ public class Game
         Command command = parser.getCommand();
         finished = processCommand(command);
         turns += 1;
-        if (turns == 200) {
+        if (turns == 220) {
           finished = quit(null);
         }
       }
@@ -195,6 +195,9 @@ public class Game
             break;
           case "look":
             look();
+            break;
+          case "use":
+            player.useItem(command);
             break;
           case "take":
             player.takeItem(command);

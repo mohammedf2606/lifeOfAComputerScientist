@@ -33,15 +33,15 @@ public class Time
    */
   public void showTime(int turns)
   {
-    int currentTimeIndex = Math.round(turns / 10);
+    int currentTimeIndex = Math.round(turns / 10) + 1;
     int index = 0;
     try {
       while (index != currentTimeIndex) {
         line = bufferedReader.readLine();
         index++;
       }
-      System.out.println("Commands used: " + turns);
-      System.out.println(line);
+      System.out.println("\nNumber of commands used: " + turns);
+      System.out.println(line + "\n");
     } catch(Exception e) {
       exceptionHandling(e);
     }

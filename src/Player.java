@@ -29,7 +29,11 @@ public class Player
     public void takeItem(Command command)
     {
         String itemName = command.getSecondWord();
-        if (! itemSet.contains(itemName)) {
+        itemSet = currentRoom.getItems().keySet();
+        if (itemSet.isEmpty()) {
+          System.out.println("There's nothing to take from this room.");
+        }
+        else if (! itemSet.contains(itemName)) {
           System.out.println("Take what?");
         }
         else {
@@ -72,7 +76,7 @@ public class Player
     }
 
     /**
-     *
+     * Use an item by carrying out relative tasks
      */
     public void useItem(Command command)
     {
@@ -86,7 +90,7 @@ public class Player
             maxWeight *= 2;
             System.out.println("You doubled the maximum weight you can carry. You can now carry " + maxWeight/1000 + " kg.");
           case "computer":
-
+            
         }
       }
     }
@@ -101,6 +105,6 @@ public class Player
         for(String item : keys) {
             returnString += " " + item;
         }
-        return returnString + "\nTotal weight: " + currentWeight.toString();
+        return returnString + "\nTotal weight: " + (currentWeight/1000).toString() + " kg";
     }
 }

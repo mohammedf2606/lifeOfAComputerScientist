@@ -8,5 +8,6 @@ The more INT you have, the more likely you are to pass your exams.
 Having certain objects can increase how much INT you can get from attending events and some items have special properties too.
 
 But remember, you must submit your courseworks in time or you will fail.
+Courseworks have certain deadlines that need to be met.
 
 Your command words are:
