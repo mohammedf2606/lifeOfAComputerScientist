@@ -14,6 +14,7 @@ public class Time
   private FileReader fileReader;
   private BufferedReader bufferedReader;
   private String line = null;
+  private int currentTimeIndex;
 
   /**
    * Constructor for objects of class Time
@@ -33,7 +34,7 @@ public class Time
    */
   public void showTime(int turns)
   {
-    int currentTimeIndex = Math.round(turns / 10) + 1;
+    currentTimeIndex = Math.round(turns / 10) + 1;
     int index = 0;
     try {
       while (index != currentTimeIndex) {
@@ -45,6 +46,12 @@ public class Time
     } catch(Exception e) {
       exceptionHandling(e);
     }
+  }
+
+  private int getTimeIndex(int turns)
+  {
+    currentTimeIndex = Math.round(turns / 10) + 1;
+    return currentTimeIndex;
   }
 
   /**

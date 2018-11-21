@@ -21,24 +21,27 @@ public class Game
 {
     private Parser parser;
     private Player player;
+    private Time time;
     private Room previousRoom = null;
     private int turns = 0;
     private TextReader textReader;
     private ArrayList<Room> roomList;
     private Stack<Room> backStack;
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppaBook, elaBook, coffee, computer, elaCW, ppaCW, notebook, drink, printer, backpack, food;
+    private Item ppaBook, elaBook, coffee, computer, notebook, drink, printer, backpack, food;
+    public Item elaCW, ppaCW;
 
     /**
      * Create the game and initialise its internal map.
      */
     public Game()
     {
-        player = new Player(5000);
-        roomList = new ArrayList<>();
-        backStack = new Stack<>();
-        createRooms();
-        parser = new Parser();
+      time = new Time();
+      player = new Player(5000);
+      roomList = new ArrayList<>();
+      backStack = new Stack<>();
+      createRooms();
+      parser = new Parser();
     }
 
     /**
@@ -152,6 +155,7 @@ public class Game
         Command command = parser.getCommand();
         finished = processCommand(command);
         turns += 1;
+        boolean released = checkCWRelease();
         if (turns == 220) {
           finished = quit(null);
         }
@@ -176,7 +180,6 @@ public class Game
      */
     private boolean processCommand(Command command)
     {
-      Time time = new Time();
       boolean wantToQuit = false;
       String commandWord = command.getCommandWord();
       if (commandWord != null) {
@@ -220,6 +223,27 @@ public class Game
         System.out.println("I don't know what you mean...");
       }
       return false;
+    }
+
+    private boolean checkCWRelease()
+    {
+      int timeIndex = time.getTimeIndex(turns);
+      switch (timeIndex) {
+        case 5:
+          System.out.println("The PPA coursework has been released.");
+          System.out.println("Use the lab computers to complete it before the deadline.");
+          System.out.println("To check the deadline, type 'deadline ppa'.")
+          return true;
+        }
+        case 12:
+          System.out.println("The ELA coursework has been released.");
+          System.out.println("Use the lab computers to complete it before the deadline.");
+          System.out.println("To check the deadline, type 'deadline ela'.");
+          return true;
+        }
+        return false;
+      }
+      // else do nothing
     }
 
     // implementations of user commands:
