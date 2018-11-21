@@ -20,8 +20,8 @@ public class Player
    */
   public Player(Integer maxWeight)
   {
-      this.maxWeight = maxWeight;
-      inventory = new HashMap<>();
+    this.maxWeight = maxWeight;
+    inventory = new HashMap<>();
   }
 
   /**
@@ -30,35 +30,35 @@ public class Player
    */
   public void takeItem(Command command)
   {
-      String itemName = command.getSecondWord();
-      itemSet = currentRoom.getItems().keySet();
-      if (itemSet.isEmpty()) {
-        System.out.println("There's nothing to take from this room.");
+    String itemName = command.getSecondWord();
+    itemSet = currentRoom.getItems().keySet();
+    if (itemSet.isEmpty()) {
+      System.out.println("There's nothing to take from this room.");
+    }
+    else if (! itemSet.contains(itemName)) {
+      System.out.println("Take what?");
+    }
+    else {
+      Item item = currentRoom.getItems().get(itemName);
+      Integer weight = item.getWeight();
+      if (itemName.equals("backpack")) {
+          System.out.println("Looks like someone left their bag after the lecture. It's bigger than yours.");
+          System.out.println("Maybe you can make USE of it...\n");
       }
-      else if (! itemSet.contains(itemName)) {
-        System.out.println("Take what?");
+      else if (currentWeight + weight <= maxWeight) {
+          if (weight == 0) {
+              System.out.println("You can't pick that up!");
+          }
+          else {
+              inventory.put(itemName, item);
+              currentWeight += weight;
+              System.out.println("Grabbed " + itemName);
+          }
       }
       else {
-        Item item = currentRoom.getItems().get(itemName);
-        Integer weight = item.getWeight();
-        if (itemName.equals("backpack")) {
-            System.out.println("Looks like someone left their bag after the lecture. It's bigger than yours.");
-            System.out.println("Maybe you can make USE of it...\n");
-        }
-        else if (currentWeight + weight <= maxWeight) {
-            if (weight == 0) {
-                System.out.println("You can't pick that up!");
-            }
-            else {
-                inventory.put(itemName, item);
-                currentWeight += weight;
-                System.out.println("Grabbed " + itemName);
-            }
-        }
-        else {
-            System.out.println("No more space in bag. You gotta drop something...");
-        }
+          System.out.println("No more space in bag. You gotta drop something...");
       }
+    }
   }
 
   /**
@@ -119,11 +119,11 @@ public class Player
    */
   public String getInventory()
   {
-      String returnString = "Inventory:";
-      Set<String> keys = inventory.keySet();
-      for(String item : keys) {
-          returnString += " " + item;
-      }
-      return returnString + "\nTotal weight: " + (currentWeight/1000).toString() + " kg";
+    String returnString = "Inventory:";
+    Set<String> keys = inventory.keySet();
+    for(String item : keys) {
+        returnString += " " + item;
+    }
+    return returnString + "\nTotal weight: " + (currentWeight/1000).toString() + " kg";
   }
 }
