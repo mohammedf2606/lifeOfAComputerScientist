@@ -1,15 +1,15 @@
 #BlueJ class context
 comment0.target=Time
-comment0.text=\n\ Write\ a\ description\ of\ class\ Time\ here.\n\n\ @author\ Fahim\ Mohammed\n\ @version\ 2018.11.19\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Time\ here.\r\n\r\n\ @author\ Fahim\ Mohammed\r\n\ @version\ 2018.11.19\r\n
 comment1.params=
 comment1.target=Time()
-comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Time\n
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Time\r\n
 comment2.params=turns
 comment2.target=void\ showTime(int)
-comment2.text=\n\ Shows\ the\ current\ time\ to\ the\ user\n
+comment2.text=\r\n\ Shows\ the\ current\ time\ to\ the\ user\r\n
 comment3.params=turns
 comment3.target=int\ getTimeIndex(int)
 comment4.params=e
 comment4.target=void\ exceptionHandling(java.lang.Exception)
-comment4.text=\n\ If\ any\ exceptions\ are\ detected,\ they\ are\ classified\ here\n
+comment4.text=\r\n\ If\ any\ exceptions\ are\ detected,\ they\ are\ classified\ here\r\n
 numComments=5

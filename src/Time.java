@@ -11,8 +11,8 @@ import java.util.*;
 public class Time
 {
   private String fileName = "";
-  private FileReader fileReader;
-  private BufferedReader bufferedReader;
+  private FileReader fr;
+  private BufferedReader br;
   private String line = null;
   private int currentTimeIndex;
 
@@ -21,12 +21,6 @@ public class Time
    */
   public Time()
   {
-    try {
-      fileReader = new FileReader("time.txt");
-      bufferedReader = new BufferedReader(fileReader);
-    } catch(Exception e) {
-      exceptionHandling(e);
-    }
   }
 
   /**
@@ -34,13 +28,14 @@ public class Time
    */
   public void showTime(int turns)
   {
-    currentTimeIndex = Math.round(turns / 10) + 1;
-    int index = 0;
+    currentTimeIndex = getTimeIndex(turns);
     try {
-      while (index != currentTimeIndex) {
-        line = bufferedReader.readLine();
-        index++;
+      fr = new FileReader("time.txt");
+      br = new BufferedReader(fr);
+      for (int i = 0; i < currentTimeIndex; i++ ) {
+        br.readLine();
       }
+      line = br.readLine();
       System.out.println("\nNumber of commands used: " + turns);
       System.out.println(line + "\n");
     } catch(Exception e) {
@@ -50,7 +45,7 @@ public class Time
 
   public int getTimeIndex(int turns)
   {
-    currentTimeIndex = Math.round(turns / 10) + 1;
+    currentTimeIndex = Math.round(turns / 10);
     return currentTimeIndex;
   }
 

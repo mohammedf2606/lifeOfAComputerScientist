@@ -193,8 +193,7 @@ public class Game
           case "quit":
             wantToQuit = quit(command);
             return wantToQuit;
-          case "back":.
-
+          case "back":
             goBack();
             break;
           case "look":
@@ -219,7 +218,7 @@ public class Game
             showTimetable();
             break;
           case "deadline":
-            checkDeadline():
+            checkDeadline();
             break;
         }
       }
