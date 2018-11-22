@@ -193,7 +193,8 @@ public class Game
           case "quit":
             wantToQuit = quit(command);
             return wantToQuit;
-          case "back":
+          case "back":.
+
             goBack();
             break;
           case "look":
@@ -216,6 +217,9 @@ public class Game
             break;
           case "timetable":
             showTimetable();
+            break;
+          case "deadline":
+            checkDeadline():
             break;
         }
       }
@@ -242,6 +246,8 @@ public class Game
         return false;
     }
 
+
+
     public int getTurns()
     {
         return turns;
@@ -255,11 +261,19 @@ public class Game
      * Here we print some stupid, cryptic message and a list of the
      * command words.
      */
+
+
+
     private void printHelp()
     {
       textReader = new TextReader("help");
       textReader.reader();
       parser.showCommands();
+    }
+
+    private void checkDeadline()
+    {
+
     }
 
     /**
