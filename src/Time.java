@@ -1,4 +1,4 @@
-import java.lang.Math.*;
+import java.io.*;
 
 /**
  * Write a description of class Time here.

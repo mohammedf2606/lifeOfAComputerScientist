@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Class Player - creates a player in the game
  *
@@ -5,9 +7,9 @@
  * @version 2018.11.17
  */
 public class Player {
-    public HashMap<String, Item> inventory;
-    public Integer maxWeight;
-    public Room currentRoom;
+    HashMap<String, Item> inventory;
+    Integer maxWeight;
+    Room currentRoom;
     private Integer currentWeight = 0;
     private Set<String> itemSet;
     private Game game;

@@ -1,3 +1,5 @@
+import java.io.*;
+
 /**
  * Reads the story from a text file
  *
@@ -6,8 +8,6 @@
  */
 public class TextReader {
     private String fileName = "";
-    private String line = null;
-    private FileReader fileReader;
     private BufferedReader bufferedReader;
 
     /**
@@ -33,7 +33,7 @@ public class TextReader {
                         break;
                 }
             }
-            fileReader = new FileReader(fileName);
+            FileReader fileReader = new FileReader(fileName);
             bufferedReader = new BufferedReader(fileReader);
         } catch (Exception e) {
             exceptionHandling(e);
@@ -44,13 +44,12 @@ public class TextReader {
      * Prints out each line of the text document with the story
      * If an exception is raised, it is passed for exception handling
      */
-    public void reader() {
+    void reader() {
         try {
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
-
-            // Always close files.
             bufferedReader.close();
         } catch (Exception e) {
             exceptionHandling(e);
@@ -60,7 +59,7 @@ public class TextReader {
     /**
      * If any exceptions are detected, they are classified here
      */
-    public void exceptionHandling(Exception e) {
+    private void exceptionHandling(Exception e) {
         if (e instanceof FileNotFoundException) {
             System.out.println("Unable to open file '" + fileName + "'");
         }

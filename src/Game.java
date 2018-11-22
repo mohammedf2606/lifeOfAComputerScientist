@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * This class is the main class of the "World of Zuul" application.
  * "World of Zuul" is a very simple, text based adventure game.  Users
@@ -19,15 +21,14 @@ public class Game {
     private Parser parser;
     private Player player;
     private Time time;
-    private Room previousRoom = null;
     private int turns = 0;
     private TextReader textReader;
-    private ArrayList<Room> roomList;
-    private Stack<Room> backStack;
-    private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppaBook, elaBook, coffee, computer, notebook, drink, elaCW, ppaCW, printer, food, backpack;
+    private ArrayList<Room> roomList = new ArrayList<>();
+    private Stack<Room> backStack = new Stack<>();
+    private Room theatre, arcade, lab, pub, library, kitchen;
+    private Item elaCW, ppaCW;
     private boolean computerUsed;
-    private HashMap<String, Item> allItems;
+    private HashMap<String, Item> allItems = new HashMap<>();
 
     /**
      * Create the game and initialise its internal map.
@@ -35,8 +36,6 @@ public class Game {
     public Game() {
         time = new Time();
         player = new Player(5000);
-        roomList = new ArrayList<>();
-        backStack = new Stack<>();
         createRooms();
         parser = new Parser();
     }
@@ -46,18 +45,18 @@ public class Game {
      */
     private void createRooms() {
         // create the rooms
-        outside = new Room("outside", "outside the main entrance of the university");
+        Room outside = new Room("outside", "outside the main entrance of the university");
         library = new Room("library", "in the Maughan Library");
         arcade = new Room("arcade", "in the Arcade");
         theatre = new Room("theatre", "in a lecture theatre");
         pub = new Room("pub", "at The Vault");
         kitchen = new Room("kitchen", "in the canteen");
-        fifth = new Room("fifth", "on the fifth floor of Bush House");
-        office = new Room("office", "in the Informatics departmental office");
-        classroom = new Room("classroom", "in a classroom");
-        sixth = new Room("sixth", "on the sixth floor of Bush House");
+        Room fifth = new Room("fifth", "on the fifth floor of Bush House");
+        Room office = new Room("office", "in the Informatics departmental office");
+        Room classroom = new Room("classroom", "in a classroom");
+        Room sixth = new Room("sixth", "on the sixth floor of Bush House");
         lab = new Room("lab", "in a computing lab");
-        random = new Room("random", "in a teleporter");
+        Room random = new Room("random", "in a teleporter");
 
         Collections.addAll(roomList, outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom);
 
@@ -105,17 +104,17 @@ public class Game {
      * Creates all the items and places them in their designated room
      */
     private void createItems() {
-        ppaBook = new Item("PPABook", "your PPA book", 1200);
-        elaBook = new Item("ELABook", "your ELA book", 1000);
-        coffee = new Item("coffee", "a cup of coffee", 300);
-        computer = new Item("computer", "a lab computer", 0);
+        Item ppaBook = new Item("PPABook", "your PPA book", 1200);
+        Item elaBook = new Item("ELABook", "your ELA book", 1000);
+        Item coffee = new Item("coffee", "a cup of coffee", 300);
+        Item computer = new Item("computer", "a lab computer", 0);
         elaCW = new Item("elaCW", "your completed ELA coursework", 200);
         ppaCW = new Item("ppaCW", "your completed PPA coursework", 200);
-        notebook = new Item("notebook", "your notebook", 400);
-        drink = new Item("beer", "a pint of beer", 300);
-        printer = new Item("printer", "a printer", 0);
-        backpack = new Item("backpack", "a bigger backpack", 1);
-        food = new Item("food", "some food", 400);
+        Item notebook = new Item("notebook", "your notebook", 400);
+        Item drink = new Item("beer", "a pint of beer", 300);
+        Item printer = new Item("printer", "a printer", 0);
+        Item backpack = new Item("backpack", "a bigger backpack", 1);
+        Item food = new Item("food", "some food", 400);
 
         Map<String, Item> tempItemMap = Map.of(ppaBook.getName(), ppaBook,
                 elaBook.getName(), elaBook,
@@ -126,6 +125,8 @@ public class Game {
                 drink.getName(), drink,
                 food.getName(), food,
                 backpack.getName(), backpack);
+
+        allItems = new HashMap<>(tempItemMap);
 
         library.addItem(ppaBook);
         library.addItem(elaBook);
@@ -146,7 +147,7 @@ public class Game {
     /**
      * Main play routine.  Loops until end of play.
      */
-    public void play() {
+    void play() {
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -182,7 +183,7 @@ public class Game {
      * @return true If the command ends the game, false otherwise.
      */
     private boolean processCommand(Command command) {
-        boolean wantToQuit = false;
+        boolean wantToQuit;
         String commandWord = command.getCommandWord();
         if (commandWord != null) {
             switch (commandWord) {
@@ -235,7 +236,7 @@ public class Game {
      *
      */
 
-    public boolean checkCWRelease() {
+    private boolean checkCWRelease() {
         switch (turns) {
             case 50:
                 System.out.println("The PPA coursework has been released.");
@@ -305,12 +306,12 @@ public class Game {
      */
     private void dropItem(Command command) {
         String itemName = command.getSecondWord();
-        itemSet = currentRoom.getItems().keySet();
+        Set<String> itemSet = player.currentRoom.getItems().keySet();
         if (!itemSet.contains(itemName)) {
             System.out.println("Drop what?");
         } else {
-            inventory.remove(itemName);
-            currentRoom.items.put(itemName, allItems.get(itemName));
+            player.inventory.remove(itemName);
+            player.currentRoom.items.put(itemName, allItems.get(itemName));
             System.out.println("Dropped " + itemName);
         }
     }
@@ -321,7 +322,7 @@ public class Game {
     private void useItem(Command command) {
         String itemName = command.getSecondWord();
         Set<String> playerItemSet = player.inventory.keySet();
-        Set<String> unmovableItems = new HashSet<String>(Arrays.asList("computer", "printer"));
+        Set<String> unmovableItems = new HashSet<>(Arrays.asList("computer", "printer"));
         if (!playerItemSet.contains(itemName) && !unmovableItems.contains(itemName)) {
             System.out.println("Use what?");
         } else {
@@ -360,7 +361,7 @@ public class Game {
      * Try to go to the previous room, else error message.
      */
     private void goBack() {
-        if (backStack.empty() != true) {
+        if (!backStack.empty()) {
             player.currentRoom = backStack.pop();
             look();
         } else {
@@ -401,7 +402,7 @@ public class Game {
                     nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
                 }
             }
-            previousRoom = player.currentRoom;
+            Room previousRoom = player.currentRoom;
             backStack.push(previousRoom);
             player.currentRoom = nextRoom;
             look();
