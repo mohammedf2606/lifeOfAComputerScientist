@@ -1,0 +1,7 @@
+
+Welcome to King's College London!
+King's College London is the setting for this amazing game.
+You have 20 commands at the start to use for exploration. Use them wisely.
+You must sit your exams within 220 commands.
+
+Type 'help' if you need help.
