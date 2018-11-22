@@ -18,16 +18,19 @@ import java.util.*;
  */
 
 public class Game {
+
     private Parser parser;
     private Player player;
     private Time time;
-    private int turns = 0;
+    public int turns = 0;
     private TextReader textReader;
     private ArrayList<Room> roomList = new ArrayList<>();
     private Stack<Room> backStack = new Stack<>();
     private Room theatre, arcade, lab, pub, library, kitchen;
     private Item elaCW, ppaCW;
+    private Character ppaLecturer, elaLecturer;
     private boolean computerUsed;
+    private boolean released = false;
     private HashMap<String, Item> allItems = new HashMap<>();
 
     /**
@@ -96,6 +99,7 @@ public class Game {
         lab.setExit("south", sixth);
 
         createItems();
+        createCharacters();
 
         player.currentRoom = outside;  // start game outside
     }
@@ -145,6 +149,19 @@ public class Game {
     }
 
     /**
+     *
+     */
+     private void createCharacters()
+     {
+       Character ppaLecturer = new Character("Prof. Kölling");
+       Character elaLecturer = new Character("Prof. Rodrigues");
+
+       office.addCharacter(ppaLecturer);
+       office.addCharacter(elaLecturer);
+     }
+
+
+    /**
      * Main play routine.  Loops until end of play.
      */
     void play() {
@@ -159,10 +176,12 @@ public class Game {
             Command command = parser.getCommand();
             finished = processCommand(command);
             turns += 1;
-            boolean released = checkCWRelease();
             if (turns == 220) {
                 finished = quit(null);
             }
+            moveCharacters(ppaLecturer);
+            moveCharacters(elaLecturer);
+            checkCWRelease();
         }
         System.out.println("\nThank you for playing. Good bye.");
     }
@@ -223,7 +242,7 @@ public class Game {
                     showTimetable();
                     break;
                 case "deadline":
-                    checkDeadline(command);
+                    getDeadline(command);
                     break;
             }
         } else {
@@ -236,30 +255,62 @@ public class Game {
      *
      */
 
-    private boolean checkCWRelease() {
+    private void checkCWRelease() {
         switch (turns) {
             case 50:
                 System.out.println("The PPA coursework has been released.");
                 System.out.println("Use the lab computers to complete it before the deadline.");
                 System.out.println("To check the deadline, type 'deadline ppa'.");
-                return true;
+                released = true;
+                return;
             case 120:
                 System.out.println("The ELA coursework has been released.");
                 System.out.println("Use the lab computers to complete it before the deadline.");
                 System.out.println("To check the deadline, type 'deadline ela'.");
-                return true;
+                released = true;
+                return;
         }
-        return false;
     }
 
     /**
-     * @return The number of turns that has occurred
+     * Moves the character to a particular room dependant of turns
+     * @param character The character being moved
      */
 
-    private int getTurns() {
-        return turns;
+    private void moveCharacters(Character character)
+    {
+      switch (character.getName()) {
+        case "Prof. Kölling":
+          boolean ppa = true;
+          break;
+        case "Prof. Rodrigues":
+          boolean ela = true;
+          break;
+      switch (turns) {
+        case 30: case 130:
+          if (ppa) {
+            changeRooms(theatre);
+            break;
+            }
+        case 40: case 140:
+          if (ela) {
+            changeRooms(theatre);
+          }
+        case 70: case 170:
+          if (ela) {
+            changeRooms(classroom);
+          }
+        case 90: case 190:
+          if (ppa) {
+            changeRooms(theatre);
+          }
+        case 110: case 210:
+          if (ppa) {
+            changeRooms(lab);
+          }
+        }
+      }
     }
-
 
     // implementations of user commands:
 
@@ -276,10 +327,10 @@ public class Game {
     }
 
     /**
-     *
+     * Implements the deadline command.
      */
 
-    private void checkDeadline(Command command) {
+    private void getDeadline(Command command) {
         if (!command.hasSecondWord()) {
             System.out.println("What deadline would you like to check?");
         }
@@ -332,7 +383,7 @@ public class Game {
                     System.out.println("You doubled the maximum weight you can carry. You can now carry " + player.maxWeight / 1000 + " kg.");
                     break;
                 case "computer":
-                    if (checkCWRelease()) {
+                    if (released) {
                         computerUsed = true;
                         System.out.println("Now use the printer to print out your completed coursework.");
                     } else {
@@ -341,7 +392,7 @@ public class Game {
                     break;
                 case "printer":
                     if (computerUsed) {
-                        if (time.getTimeIndex(getTurns()) == 5) {
+                        if (time.getTimeIndex(getTurns()) >= 5 && time.getTimeIndex(getTurns()) <= 12) {
                             player.inventory.put(ppaCW.getName(), ppaCW);
                             System.out.println("Now hand in your coursework to Prof. Kölling!");
                         } else {
@@ -353,7 +404,10 @@ public class Game {
                     }
                     break;
             }
-            player.inventory.remove(itemName);
+            if (!player.inventory.isEmpty() && !computerUsed) {
+              player.currentWeight -= player.inventory.get(itemName).getWeight();
+              player.inventory.remove(itemName);
+            }
         }
     }
 

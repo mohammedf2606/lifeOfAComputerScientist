@@ -20,6 +20,7 @@ public class Room {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private String name;
+    private HashMap<String, Character> characters;
 
     /**
      * Create a room described "description". Initially, it has
@@ -48,11 +49,19 @@ public class Room {
     /**
      * Define an item in a room
      *
-     * @param description What the item actually is
-     * @param weight      How heavy the item is
+     * @param item An item object to place in the room
      */
     public void addItem(Item item) {
         items.put(item.getName(), item);
+    }
+
+    /**
+     * Define an character in a room
+     *
+     * @param character A character object to place in the room
+     */
+    public void addCharacter(Character character) {
+        characters.put(character.getName(), character);
     }
 
     /**

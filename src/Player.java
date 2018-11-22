@@ -10,7 +10,7 @@ public class Player {
     HashMap<String, Item> inventory;
     Integer maxWeight;
     Room currentRoom;
-    private Integer currentWeight = 0;
+    Integer currentWeight = 0;
     private Set<String> itemSet;
     private Game game;
     private Time time;
