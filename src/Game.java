@@ -306,8 +306,8 @@ public class Game {
      */
     private void dropItem(Command command) {
         String itemName = command.getSecondWord();
-        Set<String> itemSet = player.currentRoom.getItems().keySet();
-        if (!itemSet.contains(itemName)) {
+        Set<String> playerItemSet = player.inventory.keySet();
+        if (!playerItemSet.contains(itemName)) {
             System.out.println("Drop what?");
         } else {
             player.inventory.remove(itemName);
