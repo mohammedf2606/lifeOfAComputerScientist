@@ -5,22 +5,22 @@ import java.util.HashSet;
 /**
  * Class Room - a room in an adventure game.
  *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * This class is part of the "World of Zuul" application.
+ * "World of Zuul" is a very simple, text based adventure game.
  *
- * A "Room" represents one location in the scenery of the game.  It is 
- * connected to other rooms via exits.  For each existing exit, the room 
+ * A "Room" represents one location in the scenery of the game.  It is
+ * connected to other rooms via exits.  For each existing exit, the room
  * stores a reference to the neighboring room.
- * 
+ *
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
 
-public class Room 
+public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private HashMap<String, Item> items;        // stores items of this room.
+    public HashMap<String, Item> items;        // stores items of this room.
     private String name;
 
     /**
@@ -29,7 +29,7 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String name, String description) 
+    public Room(String name, String description)
     {
         this.name = name;
         this.description = description;
@@ -42,7 +42,7 @@ public class Room
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) 
+    public void setExit(String direction, Room neighbor)
     {
         exits.put(direction, neighbor);
     }
@@ -56,7 +56,7 @@ public class Room
     {
         items.put(item.getName(), item);
     }
-    
+
     /**
      * @return The name of the room
      * (the one that was defined in the constructor).
@@ -65,7 +65,7 @@ public class Room
     {
         return name;
     }
-    
+
     /**
      * @return The short description of the room
      * (the one that was defined in the constructor).
@@ -107,11 +107,11 @@ public class Room
      * @param direction The exit's direction.
      * @return The room in the given direction.
      */
-    public Room getExit(String direction) 
+    public Room getExit(String direction)
     {
         return exits.get(direction);
     }
-    
+
     /**
      * Return a string describing the items in the room, for example
      * "Items: beer".
@@ -129,7 +129,7 @@ public class Room
         }
         return returnString;
     }
-    
+
     /**
      * Returns the items in the current room
      */
@@ -138,4 +138,3 @@ public class Room
         return items;
     }
 }
-

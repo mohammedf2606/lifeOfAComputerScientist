@@ -28,8 +28,9 @@ public class Game
     private ArrayList<Room> roomList;
     private Stack<Room> backStack;
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
-    private Item ppaBook, elaBook, coffee, computer, notebook, drink, printer, backpack, food;
-    public Item elaCW, ppaCW;
+    private Item ppaBook, elaBook, coffee, computer, notebook, drink, elaCW, ppaCW, printer, food, backpack;
+    private boolean computerUsed;
+    private HashMap<String,Item> allItems;
 
     /**
      * Create the game and initialise its internal map.
@@ -122,6 +123,16 @@ public class Game
         backpack = new Item("backpack", "a bigger backpack", 1);
         food = new Item("food", "some food", 400);
 
+        Map<String, Item> tempItemMap = Map.of(ppaBook.getName(), ppaBook,
+                                               elaBook.getName(), elaBook,
+                                               coffee.getName(), coffee,
+                                               elaCW.getName(), elaCW,
+                                               ppaCW.getName(), ppaCW,
+                                               notebook.getName(), notebook,
+                                               drink.getName(), drink,
+                                               food.getName(), food,
+                                               backpack.getName(), backpack);
+
         library.addItem(ppaBook);
         library.addItem(elaBook);
 
@@ -129,14 +140,13 @@ public class Game
 
         lab.addItem(computer);
         lab.addItem(printer);
-        lab.addItem(elaCW);
-        lab.addItem(ppaCW);
 
         pub.addItem(drink);
 
         kitchen.addItem(food);
 
         theatre.addItem(backpack);
+        theatre.addItem(notebook);
     }
 
     /**
@@ -200,25 +210,27 @@ public class Game
             look();
             break;
           case "use":
-            player.useItem(command);
+            useItem(command);
             break;
           case "take":
             player.takeItem(command);
             break;
           case "drop":
-            player.dropItem(command);
+            dropItem(command);
             break;
           case "items":
             System.out.println(player.getInventory());
             break;
           case "time":
-            time.showTime(turns);
+            String currentTime = time.getTime(turns);
+            System.out.println("\nNumber of commands used: " + turns);
+            System.out.println(currentTime + "\n");
             break;
           case "timetable":
             showTimetable();
             break;
           case "deadline":
-            checkDeadline();
+            checkDeadline(command);
             break;
         }
       }
@@ -227,6 +239,10 @@ public class Game
       }
       return false;
     }
+
+    /**
+     *
+     */
 
     public boolean checkCWRelease()
     {
@@ -245,7 +261,9 @@ public class Game
         return false;
     }
 
-
+    /**
+     * @return The number of turns that has occurred
+     */
 
     public int getTurns()
     {
@@ -261,8 +279,6 @@ public class Game
      * command words.
      */
 
-
-
     private void printHelp()
     {
       textReader = new TextReader("help");
@@ -270,9 +286,93 @@ public class Game
       parser.showCommands();
     }
 
-    private void checkDeadline()
-    {
+    /**
+     *
+     */
 
+    private void checkDeadline(Command command)
+    {
+      if (!command.hasSecondWord()) {
+        System.out.println("What deadline would you like to check?");
+      }
+      String module = command.getSecondWord();
+      switch (module) {
+        case "ppa":
+          System.out.println("The deadline for PPA is " + time.getTime(100));
+          break;
+        case "ela":
+          System.out.println("The deadline for ELA is " + time.getTime(170));
+          break;
+        case "cs1": case "fc1":
+          System.out.println("You don't have coursework for this module.");
+          break;
+        default:
+          System.out.println("That is not the name of a module!");
+          break;
+      }
+    }
+
+    /**
+     * Removes an item from player's inventory.
+     */
+    public void dropItem(Command command)
+    {
+      String itemName = command.getSecondWord();
+      itemSet = currentRoom.getItems().keySet();
+      if (! itemSet.contains(itemName)) {
+        System.out.println("Drop what?");
+      }
+      else {
+        inventory.remove(itemName);
+        currentRoom.items.put(itemName, allItems.get(itemName));
+        System.out.println("Dropped " + itemName);
+      }
+    }
+
+    /**
+     * Use an item by carrying out relative tasks
+     */
+    public void useItem(Command command)
+    {
+      String itemName = command.getSecondWord();
+      Set<String> playerItemSet = player.inventory.keySet();
+      Set<String> unmovableItems = new HashSet<String>(Arrays.asList("computer", "printer"));
+      if(!playerItemSet.contains(itemName) && !unmovableItems.contains(itemName)) {
+        System.out.println("Use what?");
+      }
+      else {
+        switch (itemName) {
+          case "backpack":
+            player.maxWeight *= 2;
+            System.out.println("You doubled the maximum weight you can carry. You can now carry " + player.maxWeight/1000 + " kg.");
+            break;
+          case "computer":
+            if (checkCWRelease()) {
+              computerUsed = true;
+              System.out.println("Now use the printer to print out your completed coursework.");
+            }
+            else {
+              System.out.println("There's nothing to do on the computer yet.");
+            }
+            break;
+          case "printer":
+            if (computerUsed) {
+              if (time.getTimeIndex(getTurns()) == 5){
+                player.inventory.put(ppaCW.getName(), ppaCW);
+                System.out.println("Now hand in your coursework to Prof. Kölling!");
+              }
+              else {
+                player.inventory.put(elaCW.getName(), elaCW);
+                System.out.println("Now hand in your coursework to Prof. Rodrigues!");
+              }
+            }
+            else {
+              System.out.println("There's nothing to print.");
+            }
+            break;
+        }
+        player.inventory.remove(itemName);
+      }
     }
 
     /**

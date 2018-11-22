@@ -26,7 +26,7 @@ public class Time
   /**
    * Shows the current time to the user
    */
-  public void showTime(int turns)
+  public String getTime(int turns)
   {
     currentTimeIndex = getTimeIndex(turns);
     try {
@@ -36,10 +36,10 @@ public class Time
         br.readLine();
       }
       line = br.readLine();
-      System.out.println("\nNumber of commands used: " + turns);
-      System.out.println(line + "\n");
+      return line;
     } catch(Exception e) {
       exceptionHandling(e);
+      return "";
     }
   }
 

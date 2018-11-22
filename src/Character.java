@@ -8,26 +8,19 @@
 public class Character
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private String name;
+    private Room currentRoom;
 
     /**
      * Constructor for objects of class Character
      */
-    public Character()
+    public Character(String name)
     {
-        // initialise instance variables
-        x = 0;
+        this.name = name;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    private void changeRooms()
     {
-        // put your code here
-        return x + y;
+
     }
 }
