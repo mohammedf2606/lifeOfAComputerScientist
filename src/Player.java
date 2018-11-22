@@ -13,6 +13,7 @@ public class Player
   public Room currentRoom;
   private Set<String> itemSet;
   private Game game;
+  private Time time;
   private boolean computerUsed;
 
   /**
@@ -67,7 +68,7 @@ public class Player
   public void dropItem(Command command)
   {
     String itemName = command.getSecondWord();
-    Set<String> itemSet = currentRoom.getItems().keySet();
+    itemSet = currentRoom.getItems().keySet();
     if (! itemSet.contains(itemName)) {
       System.out.println("Drop what?");
     }
@@ -83,6 +84,7 @@ public class Player
   public void useItem(Command command)
   {
     String itemName = command.getSecondWord();
+    Set<String> itemSet = currentRoom.getItems().keySet();
     if(! itemSet.contains(itemName)) {
       System.out.println("Use what?");
     }
@@ -101,7 +103,7 @@ public class Player
           }
         case "printer":
           if (computerUsed) {
-            if (time.getTimeIndex() == 5){
+            if (time.getTimeIndex(game.getTurns()) == 5){
               inventory.put(game.ppaCW.getName(), game.ppaCW);
               System.out.println("Now hand in your coursework to Prof. Kölling!");
             }
@@ -124,6 +126,6 @@ public class Player
     for(String item : keys) {
         returnString += " " + item;
     }
-    return returnString + "\nTotal weight: " + (currentWeight/1000).toString() + " kg";
+    return returnString + "\nTotal weight: " + (currentWeight).toString() + " g";
   }
 }

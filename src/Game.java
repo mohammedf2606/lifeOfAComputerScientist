@@ -225,26 +225,28 @@ public class Game
       return false;
     }
 
-    private boolean checkCWRelease()
+    public boolean checkCWRelease()
     {
-      int timeIndex = time.getTimeIndex(turns);
-      switch (timeIndex) {
-        case 5:
+      switch (turns) {
+        case 50:
           System.out.println("The PPA coursework has been released.");
           System.out.println("Use the lab computers to complete it before the deadline.");
-          System.out.println("To check the deadline, type 'deadline ppa'.")
+          System.out.println("To check the deadline, type 'deadline ppa'.");
           return true;
-        }
-        case 12:
+        case 120:
           System.out.println("The ELA coursework has been released.");
           System.out.println("Use the lab computers to complete it before the deadline.");
           System.out.println("To check the deadline, type 'deadline ela'.");
           return true;
         }
         return false;
-      }
-      // else do nothing
     }
+
+    public int getTurns()
+    {
+        return turns;
+    }
+
 
     // implementations of user commands:
 

@@ -48,7 +48,7 @@ public class Time
     }
   }
 
-  private int getTimeIndex(int turns)
+  public int getTimeIndex(int turns)
   {
     currentTimeIndex = Math.round(turns / 10) + 1;
     return currentTimeIndex;
