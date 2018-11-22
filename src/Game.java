@@ -1,24 +1,21 @@
-import java.util.*;
-
 /**
- *  This class is the main class of the "World of Zuul" application.
- *  "World of Zuul" is a very simple, text based adventure game.  Users
- *  can walk around some scenery. That's all. It should really be extended
- *  to make it more interesting!
+ * This class is the main class of the "World of Zuul" application.
+ * "World of Zuul" is a very simple, text based adventure game.  Users
+ * can walk around some scenery. That's all. It should really be extended
+ * to make it more interesting!
+ * <p>
+ * To play this game, create an instance of this class and call the "play"
+ * method.
+ * <p>
+ * This main class creates and initialises all the others: it creates all
+ * rooms, creates the parser and starts the game.  It also evaluates and
+ * executes the commands that the parser returns.
  *
- *  To play this game, create an instance of this class and call the "play"
- *  method.
- *
- *  This main class creates and initialises all the others: it creates all
- *  rooms, creates the parser and starts the game.  It also evaluates and
- *  executes the commands that the parser returns.
- *
- * @author  Michael Kölling and David J. Barnes
+ * @author Michael Kölling and David J. Barnes
  * @version 2016.02.29
  */
 
-public class Game
-{
+public class Game {
     private Parser parser;
     private Player player;
     private Time time;
@@ -30,39 +27,37 @@ public class Game
     private Room outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom, random;
     private Item ppaBook, elaBook, coffee, computer, notebook, drink, elaCW, ppaCW, printer, food, backpack;
     private boolean computerUsed;
-    private HashMap<String,Item> allItems;
+    private HashMap<String, Item> allItems;
 
     /**
      * Create the game and initialise its internal map.
      */
-    public Game()
-    {
-      time = new Time();
-      player = new Player(5000);
-      roomList = new ArrayList<>();
-      backStack = new Stack<>();
-      createRooms();
-      parser = new Parser();
+    public Game() {
+        time = new Time();
+        player = new Player(5000);
+        roomList = new ArrayList<>();
+        backStack = new Stack<>();
+        createRooms();
+        parser = new Parser();
     }
 
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
-    {
+    private void createRooms() {
         // create the rooms
-        outside = new Room("outside","outside the main entrance of the university");
-        library = new Room("library","in the Maughan Library");
-        arcade = new Room("arcade","in the Arcade");
-        theatre = new Room("theatre","in a lecture theatre");
-        pub = new Room("pub","at The Vault");
-        kitchen = new Room("kitchen","in the canteen");
-        fifth = new Room("fifth","on the fifth floor of Bush House");
-        office = new Room("office","in the Informatics departmental office");
-        classroom = new Room("classroom","in a classroom");
-        sixth = new Room("sixth","on the sixth floor of Bush House");
-        lab = new Room("lab","in a computing lab");
-        random = new Room("random","in a teleporter");
+        outside = new Room("outside", "outside the main entrance of the university");
+        library = new Room("library", "in the Maughan Library");
+        arcade = new Room("arcade", "in the Arcade");
+        theatre = new Room("theatre", "in a lecture theatre");
+        pub = new Room("pub", "at The Vault");
+        kitchen = new Room("kitchen", "in the canteen");
+        fifth = new Room("fifth", "on the fifth floor of Bush House");
+        office = new Room("office", "in the Informatics departmental office");
+        classroom = new Room("classroom", "in a classroom");
+        sixth = new Room("sixth", "on the sixth floor of Bush House");
+        lab = new Room("lab", "in a computing lab");
+        random = new Room("random", "in a teleporter");
 
         Collections.addAll(roomList, outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom);
 
@@ -109,29 +104,28 @@ public class Game
     /**
      * Creates all the items and places them in their designated room
      */
-    private void createItems()
-    {
-        ppaBook = new Item("PPABook","your PPA book", 1200);
-        elaBook = new Item("ELABook","your ELA book", 1000);
-        coffee = new Item("coffee","a cup of coffee", 300);
-        computer = new Item("computer","a lab computer", 0);
-        elaCW = new Item("elaCW","your completed ELA coursework", 200);
-        ppaCW = new Item("ppaCW","your completed PPA coursework", 200);
-        notebook = new Item("notebook","your notebook",400);
-        drink = new Item("beer","a pint of beer", 300);
-        printer = new Item("printer","a printer", 0);
+    private void createItems() {
+        ppaBook = new Item("PPABook", "your PPA book", 1200);
+        elaBook = new Item("ELABook", "your ELA book", 1000);
+        coffee = new Item("coffee", "a cup of coffee", 300);
+        computer = new Item("computer", "a lab computer", 0);
+        elaCW = new Item("elaCW", "your completed ELA coursework", 200);
+        ppaCW = new Item("ppaCW", "your completed PPA coursework", 200);
+        notebook = new Item("notebook", "your notebook", 400);
+        drink = new Item("beer", "a pint of beer", 300);
+        printer = new Item("printer", "a printer", 0);
         backpack = new Item("backpack", "a bigger backpack", 1);
         food = new Item("food", "some food", 400);
 
         Map<String, Item> tempItemMap = Map.of(ppaBook.getName(), ppaBook,
-                                               elaBook.getName(), elaBook,
-                                               coffee.getName(), coffee,
-                                               elaCW.getName(), elaCW,
-                                               ppaCW.getName(), ppaCW,
-                                               notebook.getName(), notebook,
-                                               drink.getName(), drink,
-                                               food.getName(), food,
-                                               backpack.getName(), backpack);
+                elaBook.getName(), elaBook,
+                coffee.getName(), coffee,
+                elaCW.getName(), elaCW,
+                ppaCW.getName(), ppaCW,
+                notebook.getName(), notebook,
+                drink.getName(), drink,
+                food.getName(), food,
+                backpack.getName(), backpack);
 
         library.addItem(ppaBook);
         library.addItem(elaBook);
@@ -152,111 +146,107 @@ public class Game
     /**
      * Main play routine.  Loops until end of play.
      */
-    public void play()
-    {
-      printWelcome();
+    public void play() {
+        printWelcome();
 
-      // Enter the main command loop.  Here we repeatedly read commands and
-      // execute them until the game is over.
+        // Enter the main command loop.  Here we repeatedly read commands and
+        // execute them until the game is over.
 
-      boolean finished = false;
+        boolean finished = false;
 
-      while (! finished) {
-        Command command = parser.getCommand();
-        finished = processCommand(command);
-        turns += 1;
-        boolean released = checkCWRelease();
-        if (turns == 220) {
-          finished = quit(null);
+        while (!finished) {
+            Command command = parser.getCommand();
+            finished = processCommand(command);
+            turns += 1;
+            boolean released = checkCWRelease();
+            if (turns == 220) {
+                finished = quit(null);
+            }
         }
-      }
-      System.out.println("\nThank you for playing. Good bye.");
+        System.out.println("\nThank you for playing. Good bye.");
     }
 
     /**
      * Print out the opening message for the player.
      */
-    private void printWelcome()
-    {
-      textReader = new TextReader(null);
-      textReader.reader();
-      look();
+    private void printWelcome() {
+        textReader = new TextReader(null);
+        textReader.reader();
+        look();
     }
 
     /**
      * Given a command, process (that is: execute) the command.
+     *
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
      */
-    private boolean processCommand(Command command)
-    {
-      boolean wantToQuit = false;
-      String commandWord = command.getCommandWord();
-      if (commandWord != null) {
-        switch (commandWord) {
-          case "help":
-            printHelp();
-            break;
-          case "go":
-            goRoom(command);
-            break;
-          case "quit":
-            wantToQuit = quit(command);
-            return wantToQuit;
-          case "back":
-            goBack();
-            break;
-          case "look":
-            look();
-            break;
-          case "use":
-            useItem(command);
-            break;
-          case "take":
-            player.takeItem(command);
-            break;
-          case "drop":
-            dropItem(command);
-            break;
-          case "items":
-            System.out.println(player.getInventory());
-            break;
-          case "time":
-            String currentTime = time.getTime(turns);
-            System.out.println("\nNumber of commands used: " + turns);
-            System.out.println(currentTime + "\n");
-            break;
-          case "timetable":
-            showTimetable();
-            break;
-          case "deadline":
-            checkDeadline(command);
-            break;
+    private boolean processCommand(Command command) {
+        boolean wantToQuit = false;
+        String commandWord = command.getCommandWord();
+        if (commandWord != null) {
+            switch (commandWord) {
+                case "help":
+                    printHelp();
+                    break;
+                case "go":
+                    goRoom(command);
+                    break;
+                case "quit":
+                    wantToQuit = quit(command);
+                    return wantToQuit;
+                case "back":
+                    goBack();
+                    break;
+                case "look":
+                    look();
+                    break;
+                case "use":
+                    useItem(command);
+                    break;
+                case "take":
+                    player.takeItem(command);
+                    break;
+                case "drop":
+                    dropItem(command);
+                    break;
+                case "items":
+                    System.out.println(player.getInventory());
+                    break;
+                case "time":
+                    String currentTime = time.getTime(turns);
+                    System.out.println("\nNumber of commands used: " + turns);
+                    System.out.println(currentTime + "\n");
+                    break;
+                case "timetable":
+                    showTimetable();
+                    break;
+                case "deadline":
+                    checkDeadline(command);
+                    break;
+            }
+        } else {
+            System.out.println("I don't know what you mean...");
         }
-      }
-      else {
-        System.out.println("I don't know what you mean...");
-      }
-      return false;
+        return false;
     }
 
     /**
      *
      */
 
-    public boolean checkCWRelease()
-    {
-      switch (turns) {
-        case 50:
-          System.out.println("The PPA coursework has been released.");
-          System.out.println("Use the lab computers to complete it before the deadline.");
-          System.out.println("To check the deadline, type 'deadline ppa'.");
-          return true;
-        case 120:
-          System.out.println("The ELA coursework has been released.");
-          System.out.println("Use the lab computers to complete it before the deadline.");
-          System.out.println("To check the deadline, type 'deadline ela'.");
-          return true;
+    public boolean checkCWRelease() {
+        switch (turns) {
+            case 50:
+                System.out.println("The PPA coursework has been released.");
+                System.out.println("Use the lab computers to complete it before the deadline.");
+                System.out.println("To check the deadline, type 'deadline ppa'.");
+                return true;
+            case 120:
+                System.out.println("The ELA coursework has been released.");
+                System.out.println("Use the lab computers to complete it before the deadline.");
+                System.out.println("To check the deadline, type 'deadline ela'.");
+                return true;
         }
         return false;
     }
@@ -265,8 +255,7 @@ public class Game
      * @return The number of turns that has occurred
      */
 
-    public int getTurns()
-    {
+    private int getTurns() {
         return turns;
     }
 
@@ -279,121 +268,110 @@ public class Game
      * command words.
      */
 
-    private void printHelp()
-    {
-      textReader = new TextReader("help");
-      textReader.reader();
-      parser.showCommands();
+    private void printHelp() {
+        textReader = new TextReader("help");
+        textReader.reader();
+        parser.showCommands();
     }
 
     /**
      *
      */
 
-    private void checkDeadline(Command command)
-    {
-      if (!command.hasSecondWord()) {
-        System.out.println("What deadline would you like to check?");
-      }
-      String module = command.getSecondWord();
-      switch (module) {
-        case "ppa":
-          System.out.println("The deadline for PPA is " + time.getTime(100));
-          break;
-        case "ela":
-          System.out.println("The deadline for ELA is " + time.getTime(170));
-          break;
-        case "cs1": case "fc1":
-          System.out.println("You don't have coursework for this module.");
-          break;
-        default:
-          System.out.println("That is not the name of a module!");
-          break;
-      }
+    private void checkDeadline(Command command) {
+        if (!command.hasSecondWord()) {
+            System.out.println("What deadline would you like to check?");
+        }
+        String module = command.getSecondWord();
+        switch (module) {
+            case "ppa":
+                System.out.println("The deadline for PPA is " + time.getTime(100));
+                break;
+            case "ela":
+                System.out.println("The deadline for ELA is " + time.getTime(170));
+                break;
+            case "cs1":
+            case "fc1":
+                System.out.println("You don't have coursework for this module.");
+                break;
+            default:
+                System.out.println("That is not the name of a module!");
+                break;
+        }
     }
 
     /**
      * Removes an item from player's inventory.
      */
-    public void dropItem(Command command)
-    {
-      String itemName = command.getSecondWord();
-      itemSet = currentRoom.getItems().keySet();
-      if (! itemSet.contains(itemName)) {
-        System.out.println("Drop what?");
-      }
-      else {
-        inventory.remove(itemName);
-        currentRoom.items.put(itemName, allItems.get(itemName));
-        System.out.println("Dropped " + itemName);
-      }
+    private void dropItem(Command command) {
+        String itemName = command.getSecondWord();
+        itemSet = currentRoom.getItems().keySet();
+        if (!itemSet.contains(itemName)) {
+            System.out.println("Drop what?");
+        } else {
+            inventory.remove(itemName);
+            currentRoom.items.put(itemName, allItems.get(itemName));
+            System.out.println("Dropped " + itemName);
+        }
     }
 
     /**
      * Use an item by carrying out relative tasks
      */
-    public void useItem(Command command)
-    {
-      String itemName = command.getSecondWord();
-      Set<String> playerItemSet = player.inventory.keySet();
-      Set<String> unmovableItems = new HashSet<String>(Arrays.asList("computer", "printer"));
-      if(!playerItemSet.contains(itemName) && !unmovableItems.contains(itemName)) {
-        System.out.println("Use what?");
-      }
-      else {
-        switch (itemName) {
-          case "backpack":
-            player.maxWeight *= 2;
-            System.out.println("You doubled the maximum weight you can carry. You can now carry " + player.maxWeight/1000 + " kg.");
-            break;
-          case "computer":
-            if (checkCWRelease()) {
-              computerUsed = true;
-              System.out.println("Now use the printer to print out your completed coursework.");
+    private void useItem(Command command) {
+        String itemName = command.getSecondWord();
+        Set<String> playerItemSet = player.inventory.keySet();
+        Set<String> unmovableItems = new HashSet<String>(Arrays.asList("computer", "printer"));
+        if (!playerItemSet.contains(itemName) && !unmovableItems.contains(itemName)) {
+            System.out.println("Use what?");
+        } else {
+            switch (itemName) {
+                case "backpack":
+                    player.maxWeight *= 2;
+                    System.out.println("You doubled the maximum weight you can carry. You can now carry " + player.maxWeight / 1000 + " kg.");
+                    break;
+                case "computer":
+                    if (checkCWRelease()) {
+                        computerUsed = true;
+                        System.out.println("Now use the printer to print out your completed coursework.");
+                    } else {
+                        System.out.println("There's nothing to do on the computer yet.");
+                    }
+                    break;
+                case "printer":
+                    if (computerUsed) {
+                        if (time.getTimeIndex(getTurns()) == 5) {
+                            player.inventory.put(ppaCW.getName(), ppaCW);
+                            System.out.println("Now hand in your coursework to Prof. Kölling!");
+                        } else {
+                            player.inventory.put(elaCW.getName(), elaCW);
+                            System.out.println("Now hand in your coursework to Prof. Rodrigues!");
+                        }
+                    } else {
+                        System.out.println("There's nothing to print.");
+                    }
+                    break;
             }
-            else {
-              System.out.println("There's nothing to do on the computer yet.");
-            }
-            break;
-          case "printer":
-            if (computerUsed) {
-              if (time.getTimeIndex(getTurns()) == 5){
-                player.inventory.put(ppaCW.getName(), ppaCW);
-                System.out.println("Now hand in your coursework to Prof. Kölling!");
-              }
-              else {
-                player.inventory.put(elaCW.getName(), elaCW);
-                System.out.println("Now hand in your coursework to Prof. Rodrigues!");
-              }
-            }
-            else {
-              System.out.println("There's nothing to print.");
-            }
-            break;
+            player.inventory.remove(itemName);
         }
-        player.inventory.remove(itemName);
-      }
     }
 
     /**
      * Try to go to the previous room, else error message.
      */
-    private void goBack()
-    {
-      if (backStack.empty() != true) {
-        player.currentRoom = backStack.pop();
-        look();
-      }
-      else {
-        System.out.println("You are back to the start!");
-      }
+    private void goBack() {
+        if (backStack.empty() != true) {
+            player.currentRoom = backStack.pop();
+            look();
+        } else {
+            System.out.println("You are back to the start!");
+        }
     }
 
     /**
      * Prints what is in the current room and the room's description
      */
-    private void look()
-    {
+    private void look() {
         System.out.println("\n" + player.currentRoom.getLongDescription());
     }
 
@@ -401,63 +379,59 @@ public class Game
      * Try to in to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
      */
-    private void goRoom(Command command)
-    {
-      if(!command.hasSecondWord()) {
-          // if there is no second word, we don't know where to go...
-          System.out.println("Go where?");
-          return;
-      }
+    private void goRoom(Command command) {
+        if (!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Go where?");
+            return;
+        }
 
-      String direction = command.getSecondWord();
+        String direction = command.getSecondWord();
 
-      // Try to leave current room.
-      Room nextRoom = player.currentRoom.getExit(direction);
-      Random randomizer = new Random();
+        // Try to leave current room.
+        Room nextRoom = player.currentRoom.getExit(direction);
+        Random randomizer = new Random();
 
-      if (nextRoom == null) {
-          System.out.println("There is no door!");
-      }
-      else {
-          if (nextRoom.getName().equals("random")) {
-              System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
-              while (nextRoom.getName().equals("random")) {
-                  nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
-              }
-          }
-          previousRoom = player.currentRoom;
-          backStack.push(previousRoom);
-          player.currentRoom = nextRoom;
-          look();
-      }
+        if (nextRoom == null) {
+            System.out.println("There is no door!");
+        } else {
+            if (nextRoom.getName().equals("random")) {
+                System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
+                while (nextRoom.getName().equals("random")) {
+                    nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
+                }
+            }
+            previousRoom = player.currentRoom;
+            backStack.push(previousRoom);
+            player.currentRoom = nextRoom;
+            look();
+        }
     }
 
     /**
      * Reads timetable text file and prints to terminal
      */
     private void showTimetable() {
-      textReader = new TextReader("timetable");
-      textReader.reader();
+        textReader = new TextReader("timetable");
+        textReader.reader();
     }
 
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
+     *
      * @return true, if this command quits the game, false otherwise.
      */
-    private boolean quit(Command command)
-    {
-      if (command == null) {
-        textReader = new TextReader("turn");
-        textReader.reader();
-        return true;
-      }
-      else if(command.hasSecondWord()) {
-        System.out.println("Quit what?");
-        return false;
-      }
-      else {
-        return true;  // signal that we want to quit
-      }
+    private boolean quit(Command command) {
+        if (command == null) {
+            textReader = new TextReader("turn");
+            textReader.reader();
+            return true;
+        } else if (command.hasSecondWord()) {
+            System.out.println("Quit what?");
+            return false;
+        } else {
+            return true;  // signal that we want to quit
+        }
     }
 }
