@@ -26,4 +26,8 @@ public class Character
     public void changeRooms(Room targetRoom) {
       currentRoom = targetRoom;
     }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
 }

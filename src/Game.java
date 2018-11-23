@@ -22,14 +22,14 @@ public class Game {
     private Parser parser;
     private Player player;
     private Time time;
-    public int turns = 0;
+    private int turns = 0;
     private TextReader textReader;
     private ArrayList<Room> roomList = new ArrayList<>();
     private Stack<Room> backStack = new Stack<>();
-    private Room theatre, arcade, lab, pub, library, kitchen;
+    private Room theatre, arcade, lab, classroom, pub, library, kitchen, office;
     private Item elaCW, ppaCW;
     private Character ppaLecturer, elaLecturer;
-    private boolean computerUsed;
+    private boolean computerUsed, elaTeacher, ppaTeacher;
     private boolean released = false;
     private HashMap<String, Item> allItems = new HashMap<>();
 
@@ -55,8 +55,8 @@ public class Game {
         pub = new Room("pub", "at The Vault");
         kitchen = new Room("kitchen", "in the canteen");
         Room fifth = new Room("fifth", "on the fifth floor of Bush House");
-        Room office = new Room("office", "in the Informatics departmental office");
-        Room classroom = new Room("classroom", "in a classroom");
+        office = new Room("office", "in the Informatics departmental office");
+        classroom = new Room("classroom", "in a classroom");
         Room sixth = new Room("sixth", "on the sixth floor of Bush House");
         lab = new Room("lab", "in a computing lab");
         Room random = new Room("random", "in a teleporter");
@@ -153,8 +153,8 @@ public class Game {
      */
      private void createCharacters()
      {
-       Character ppaLecturer = new Character("Prof. Kölling");
-       Character elaLecturer = new Character("Prof. Rodrigues");
+       ppaLecturer = new Character("Prof. Kölling");
+       elaLecturer = new Character("Dr. Rodrigues");
 
        office.addCharacter(ppaLecturer);
        office.addCharacter(elaLecturer);
@@ -179,8 +179,8 @@ public class Game {
             if (turns == 220) {
                 finished = quit(null);
             }
-            moveCharacters(ppaLecturer);
-            moveCharacters(elaLecturer);
+            moveCharacters(ppaLecturer, command);
+            moveCharacters(elaLecturer, command);
             checkCWRelease();
         }
         System.out.println("\nThank you for playing. Good bye.");
@@ -268,7 +268,6 @@ public class Game {
                 System.out.println("Use the lab computers to complete it before the deadline.");
                 System.out.println("To check the deadline, type 'deadline ela'.");
                 released = true;
-                return;
         }
     }
 
@@ -277,40 +276,58 @@ public class Game {
      * @param character The character being moved
      */
 
-    private void moveCharacters(Character character)
+    private void moveCharacters(Character character, Command command)
     {
       switch (character.getName()) {
-        case "Prof. Kölling":
-          boolean ppa = true;
-          break;
-        case "Prof. Rodrigues":
-          boolean ela = true;
-          break;
-      switch (turns) {
-        case 30: case 130:
-          if (ppa) {
-            changeRooms(theatre);
+          case "Prof. Kölling":
+              ppaTeacher = true;
+              break;
+          case "Dr. Rodrigues":
+              elaTeacher = true;
+              break;
+      }
+      switch (time.getTimeIndex(turns)) {
+        case 3: case 13:
+          if (ppaTeacher) {
+            character.changeRooms(theatre);
             break;
             }
-        case 40: case 140:
-          if (ela) {
-            changeRooms(theatre);
+        case 4: case 14:
+          if (elaTeacher) {
+            character.changeRooms(theatre);
+            break;
           }
-        case 70: case 170:
-          if (ela) {
-            changeRooms(classroom);
+        case 7: case 17:
+          if (elaTeacher) {
+            character.changeRooms(classroom);
+            break;
           }
-        case 90: case 190:
-          if (ppa) {
-            changeRooms(theatre);
+        case 9: case 19:
+          if (ppaTeacher) {
+            character.changeRooms(theatre);
+            break;
           }
-        case 110: case 210:
-          if (ppa) {
-            changeRooms(lab);
+        case 11: case 21:
+          if (ppaTeacher) {
+            character.changeRooms(lab);
+            break;
           }
-        }
+        default:
+          character.changeRooms(office);
+          break;
+      }
+      checkSameRoom(character, command);
+    }
+
+    private void checkSameRoom(Character character, Command command)
+    {
+      String command =
+      if (character.getCurrentRoom() == player.currentRoom) {
+        
       }
     }
+
+
 
     // implementations of user commands:
 
@@ -392,7 +409,7 @@ public class Game {
                     break;
                 case "printer":
                     if (computerUsed) {
-                        if (time.getTimeIndex(getTurns()) >= 5 && time.getTimeIndex(getTurns()) <= 12) {
+                        if (time.getTimeIndex(turns) >= 5 && time.getTimeIndex(turns) <= 12) {
                             player.inventory.put(ppaCW.getName(), ppaCW);
                             System.out.println("Now hand in your coursework to Prof. Kölling!");
                         } else {

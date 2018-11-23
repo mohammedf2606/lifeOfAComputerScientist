@@ -12,8 +12,6 @@ public class Player {
     Room currentRoom;
     Integer currentWeight = 0;
     private Set<String> itemSet;
-    private Game game;
-    private Time time;
 
     /**
      * Constructor for objects of class Player
