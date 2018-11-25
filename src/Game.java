@@ -23,6 +23,9 @@ public class Game {
   private Player player;
   private Time time;
   private int turns = 0;
+  private float multiplier = 0;
+  private int itemsUsed = 0;
+  private int INTPoints = 0;
   private TextReader textReader;
   private ArrayList<Room> roomList = new ArrayList<>();
   private Stack<Room> backStack = new Stack<>();
@@ -31,9 +34,11 @@ public class Game {
   private Character ppaLecturer, elaLecturer;
   private boolean computerUsed, elaTeacher, ppaTeacher;
   private boolean released;
+  private boolean finished;
   private boolean ppaHandedIn = false;
   private boolean elaHandedIn = false;
   private HashMap<String, Item> allItems = new HashMap<>();
+  private ArrayList<String> charList = new ArrayList<>();
 
   /**
    * Create the game and initialise its internal map.
@@ -110,8 +115,8 @@ public class Game {
    * Creates all the items and places them in their designated room
    */
   private void createItems() {
-    Item ppaBook = new Item("PPABook", "your PPA book", 1200);
-    Item elaBook = new Item("ELABook", "your ELA book", 1000);
+    Item ppaBook = new Item("ppabook", "your PPA book", 1200);
+    Item elaBook = new Item("elabook", "your ELA book", 1000);
     Item coffee = new Item("coffee", "a cup of coffee", 300);
     Item computer = new Item("computer", "a lab computer", 0);
     elaCW = new Item("elaCW", "your completed ELA coursework", 200);
@@ -151,15 +156,17 @@ public class Game {
   }
 
   /**
-   *
+   * Creates the characters of the game and puts them in the correct place
    */
   private void createCharacters()
   {
-    ppaLecturer = new Character("Prof. Kölling");
-    elaLecturer = new Character("Dr. Rodrigues");
+    ppaLecturer = new Character("kolling");
+    elaLecturer = new Character("rodrigues");
 
     office.addCharacter(ppaLecturer);
     office.addCharacter(elaLecturer);
+
+    Collections.addAll(charList, ppaLecturer.getName(), elaLecturer.getName());
   }
 
 
@@ -167,8 +174,6 @@ public class Game {
    * Main play routine.  Loops until end of play.
    */
   void play() {
-
-    boolean finished = false;
 
     printWelcome();
 
@@ -178,9 +183,11 @@ public class Game {
     while (!finished) {
       Command command = parser.getCommand();
       finished = processCommand(command);
+      if (finished) { break; }
       turns += 1;
       if (turns == 220) {
         finished = quit(null);
+        if (finished) { break; }
       }
       moveCharacters(ppaLecturer);
       moveCharacters(elaLecturer);
@@ -230,6 +237,7 @@ public class Game {
           break;
         case "talk":
           playerNPCInteraction(command);
+          break;
         case "take":
           player.takeItem(command);
           break;
@@ -262,20 +270,24 @@ public class Game {
    */
 
   private boolean checkCWRelease() {
-    switch (turns) {
-      case 50:
-        System.out.println("The PPA coursework has been released.");
-        System.out.println("Use the lab computers to complete it before the deadline.");
-        System.out.println("To check the deadline, type 'deadline ppa'.");
-        return true;
-      case 120:
-        System.out.println("The ELA coursework has been released.");
-        System.out.println("Use the lab computers to complete it before the deadline.");
-        System.out.println("To check the deadline, type 'deadline ela'.");
-        return true;
-      default:
-        return false;
+    if (turns == 50) {
+      System.out.println("The PPA coursework has been released.");
+      System.out.println("Use the lab computers to complete it before the deadline.");
+      System.out.println("To check the deadline, type 'deadline ppa'.");
+      return true;
+    } else if (turns == 120) {
+      System.out.println("The ELA coursework has been released.");
+      System.out.println("Use the lab computers to complete it before the deadline.");
+      System.out.println("To check the deadline, type 'deadline ela'.");
+      return true;
+    } else if (turns > 100 && turns < 120) {
+      return false;
+    } else if (turns < 50) {
+      return false;
+    } else if (turns > 170) {
+      return false;
     }
+    return false;
   }
 
   /**
@@ -297,10 +309,10 @@ public class Game {
         if (!elaHandedIn) {
           System.out.println("You failed to hand in your ELA coursework on time.");
           System.out.println("GAME OVER!");
-          return false;
+          return true;
         }
       default:
-        return true;
+        return false;
       }
     }
 
@@ -313,10 +325,10 @@ public class Game {
   private void moveCharacters(Character character)
   {
     switch (character.getName()) {
-      case "Prof. Kölling":
+      case "kolling":
         ppaTeacher = true;
         break;
-      case "Dr. Rodrigues":
+      case "rodrigues":
         elaTeacher = true;
         break;
     }
@@ -341,7 +353,7 @@ public class Game {
           character.changeRooms(theatre);
           break;
         }
-      case 11: case 21:
+      case 11:
         if (ppaTeacher) {
           character.changeRooms(lab);
           break;
@@ -351,6 +363,21 @@ public class Game {
         ppaTeacher = false;
         elaTeacher = false;
         break;
+    }
+  }
+
+  /**
+   * Adds INT points to a player's current total.
+   */
+  private void addINTPoints(String roomName)
+  {
+    float multiplier = (float)player.currentWeight/player.maxWeight;
+    switch (roomName) {
+      case "lab": case "theatre":
+        INTPoints += multiplier * 100;
+        break;
+      case "classroom":
+        INTPoints += multiplier * 50;
     }
   }
 
@@ -417,42 +444,63 @@ public class Game {
    {
      String characterName = command.getSecondWord();
      Set<String> playerItemSet = player.inventory.keySet();
-     if (characterName == null) {
+     if (characterName == null || !charList.contains(characterName)) {
        System.out.println("Talk to who?");
      }
      else {
        Character character = player.currentRoom.getCharacters().get(characterName);
-       if (character.getCurrentRoom() == player.currentRoom) {
+       if (player.currentRoom == office && character.getCurrentRoom() == office) {
          switch (character.getName()) {
-           case "Prof. Kölling":
+           case "kolling":
             if (released && playerItemSet.contains("ppaCW")) {
-              System.out.println("Well done! You got your coursework in on time!");
+              System.out.println("Prof. Kölling: Well done! You got your coursework in on time!");
               player.inventory.remove("ppaCW");
               ppaHandedIn = true;
             }
             else if (released) {
-              System.out.println("Good luck with your coursework!");
+              System.out.println("Prof. Kölling: Good luck with your coursework!");
             }
             else {
-              System.out.println("Hey! How are you doing?");
+              System.out.println(character.getDefaultResponse());
             }
             break;
-           case "Dr. Rodrigues":
+           case "rodrigues":
             if (released && playerItemSet.contains("elaCW")) {
-              System.out.println("Well done! You got your coursework in on time!");
+              System.out.println("Dr. Rodrigues: Well done! You got your coursework in on time!");
               player.inventory.remove("elaCW");
               elaHandedIn = true;
             }
             else if (released) {
-              System.out.println("Good luck with your coursework!");
+              System.out.println("Dr. Rodrigues: Good luck with your coursework!");
             }
             else {
-              System.out.println("Hey! How are you doing?");
+              System.out.println(character.getDefaultResponse());
             }
          }
        }
+       else if (player.currentRoom == character.getCurrentRoom()) {
+         switch (player.currentRoom.getName()) {
+           case "lab":
+            addINTPoints("lab");
+            System.out.println("You have now attended the lab session!");
+            turns += 6;
+            break;
+           case "theatre":
+            addINTPoints("theatre");
+            System.out.println("You just completed a lecture!");
+            turns += 6;
+            break;
+           case "classroom":
+            addINTPoints("classroom");
+            System.out.println("You completed a small group tutorial!");
+            turns += 3;
+            break;
+         }
+         System.out.println("You have gained " + INTPoints + "INT points!");
+       }
      }
    }
+
 
   /**
    * Use an item by carrying out relative tasks
@@ -490,6 +538,11 @@ public class Game {
             System.out.println("There's nothing to print.");
           }
           break;
+        default:
+          itemsUsed += 1;
+          multiplier += (float)allItems.get(itemName).getWeight()/player.maxWeight;
+          System.out.println("You will now gain " + Math.round((multiplier * 100)/itemsUsed)
+          + "% more INT points from your next timetabled lesson!");
       }
       if (!player.inventory.isEmpty() && !computerUsed) {
         player.currentWeight -= player.inventory.get(itemName).getWeight();
@@ -532,7 +585,7 @@ public class Game {
 
     // Try to leave current room.
     Room nextRoom = player.currentRoom.getExit(direction);
-    Random randomizer = new Random();
+    Random randomiser = new Random();
 
     if (nextRoom == null) {
       System.out.println("There is no door!");
@@ -540,7 +593,7 @@ public class Game {
       if (nextRoom.getName().equals("random")) {
         System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
         while (nextRoom.getName().equals("random")) {
-          nextRoom = roomList.get(randomizer.nextInt(roomList.size()));
+          nextRoom = roomList.get(randomiser.nextInt(roomList.size()));
         }
       }
       Room previousRoom = player.currentRoom;

@@ -9,9 +9,9 @@ import java.util.*;
 public class Player {
     HashMap<String, Item> inventory;
     Integer maxWeight;
+    int INTPoints;
     Room currentRoom;
     Integer currentWeight = 0;
-    private Set<String> itemSet;
 
     /**
      * Constructor for objects of class Player
@@ -19,15 +19,17 @@ public class Player {
     public Player(Integer maxWeight) {
         this.maxWeight = maxWeight;
         inventory = new HashMap<>();
+        INTPoints = 0;
     }
 
     /**
      * Adds an item to player's inventory.
      * If max weight is exceeded, error message shown.
      */
-    public void takeItem(Command command) {
+    void takeItem(Command command)
+    {
         String itemName = command.getSecondWord();
-        itemSet = currentRoom.getItems().keySet();
+        Set<String> itemSet = currentRoom.getItems().keySet();
         if (itemSet.isEmpty()) {
             System.out.println("There's nothing to take from this room.");
         } else if (!itemSet.contains(itemName)) {
@@ -57,11 +59,12 @@ public class Player {
     /**
      * Returns items currently in player's inventory
      */
-    public String getInventory() {
-        String returnString = "Inventory:";
+    String getInventory()
+    {
+        StringBuilder returnString = new StringBuilder("Inventory:");
         Set<String> keys = inventory.keySet();
         for (String item : keys) {
-            returnString += " " + item;
+            returnString.append(" ").append(item);
         }
         return returnString + "\nTotal weight: " + currentWeight.toString()
                 + " g" + "\nMax weight: " + maxWeight.toString() + " g";

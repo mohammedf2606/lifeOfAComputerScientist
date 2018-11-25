@@ -1,0 +1,10 @@
+PPA lecture
+ELA lecture
+CS1 lecture
+CS1 practical lab
+ELA small group tutorial
+FC1 small group tutorial
+PPA lecture
+FC1 lecture
+PPA practical lab
+FC1 lecture

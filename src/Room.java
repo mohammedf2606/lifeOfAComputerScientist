@@ -34,6 +34,7 @@ public class Room {
         this.description = description;
         exits = new HashMap<>();
         items = new HashMap<>();
+        characters = new HashMap<>();
     }
 
     /**
@@ -99,12 +100,12 @@ public class Room {
      * @return Details of the room's exits.
      */
     private String getExitString() {
-        String returnString = "Exits:";
+        StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
         for (String exit : keys) {
-            returnString += " " + exit;
+            returnString.append(" ").append(exit);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     /**
@@ -128,12 +129,12 @@ public class Room {
         if (items.isEmpty()) {
             return "";
         }
-        String returnString = "\nItems:";
+        StringBuilder returnString = new StringBuilder("\nItems:");
         Set<String> keys = items.keySet();
         for (String item : keys) {
-            returnString += " " + item;
+            returnString.append(" ").append(item);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     /**
@@ -146,18 +147,18 @@ public class Room {
         if (characters.isEmpty()) {
             return "";
         }
-        String returnString = "\nCharacters:";
-        Set<String> keys = charcters.keySet();
+        StringBuilder returnString = new StringBuilder("\nCharacters:");
+        Set<String> keys = characters.keySet();
         for (String chars : keys) {
-            returnString += " " + chars;
+            returnString.append(" ").append(chars);
         }
-        return returnString;
+        return returnString.toString();
     }
 
     /**
      * Returns the characters in the current room
      */
-    public HashMap<String, Character> getCharacters()
+    HashMap<String, Character> getCharacters()
     {
       return characters;
     }
@@ -165,7 +166,7 @@ public class Room {
     /**
      * Returns the items in the current room
      */
-    public HashMap<String, Item> getItems() {
+    HashMap<String, Item> getItems() {
         return items;
     }
 }
