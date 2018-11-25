@@ -136,6 +136,14 @@ public class Room {
     }
 
     /**
+     * Returns the characters in the current room
+     */
+    public HashMap<String, Character> getCharacters()
+    {
+      return characters;
+    }
+
+    /**
      * Returns the items in the current room
      */
     public HashMap<String, Item> getItems() {
