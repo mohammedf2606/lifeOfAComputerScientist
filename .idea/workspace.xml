@@ -2,41 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Command.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Command.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/CommandWords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/CommandWords.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Item.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Item.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Main.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Parser.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Parser.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Player.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Player.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/README.TXT" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/TextReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/TextReader.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Time.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Time.ctxt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/failEndTurns.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/help.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/intro.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/package.bluej" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/time.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/timetable.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandWords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Character.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Room.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/package.bluej" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.bluej" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -50,13 +21,25 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="8" />
+            <state relative-caret-position="-2192">
+              <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Init.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -77,6 +60,7 @@
         <option value="$PROJECT_DIR$/src/TextReader.java" />
         <option value="$PROJECT_DIR$/src/Character.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Init.java" />
       </list>
     </option>
   </component>
@@ -111,7 +95,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543174873209" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543175313147" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -289,13 +273,6 @@
         <state relative-caret-position="-16" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="182" column="8" selection-start-line="182" selection-start-column="8" selection-end-line="182" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CommandWords.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -314,6 +291,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Init.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2192">
+          <caret line="27" column="48" selection-start-line="27" selection-start-column="48" selection-end-line="27" selection-end-column="48" />
         </state>
       </provider>
     </entry>

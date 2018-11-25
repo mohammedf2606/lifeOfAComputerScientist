@@ -88,7 +88,8 @@ public class Room {
      * @return A long description of this room
      */
     public String getLongDescription() {
-        return "You are " + description + ".\n" + getExitString() + getItemString();
+        return "You are " + description + ".\n"
+        + getExitString() + getItemString() + getCharString();
     }
 
     /**
@@ -131,6 +132,24 @@ public class Room {
         Set<String> keys = items.keySet();
         for (String item : keys) {
             returnString += " " + item;
+        }
+        return returnString;
+    }
+
+    /**
+     * Return a string describing the charcters in the room, for example
+     * "Character: Prof. Kölling".
+     *
+     * @return Details of the room's characters.
+     */
+    private String getCharString() {
+        if (characters.isEmpty()) {
+            return "";
+        }
+        String returnString = "\nCharacters:";
+        Set<String> keys = charcters.keySet();
+        for (String chars : keys) {
+            returnString += " " + chars;
         }
         return returnString;
     }
