@@ -23,7 +23,7 @@ public class Game {
   private Player player;
   private Time time;
   private int turns = 0;
-  private float multiplier = 0;
+  private float multiplier = 1;
   private int INTPoints = 0;
   private TextReader textReader;
   private ArrayList<Room> roomList = new ArrayList<>();
