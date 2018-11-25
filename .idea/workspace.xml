@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Command.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Command.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/CommandWords.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/CommandWords.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Item.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Item.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Main.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Parser.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Parser.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Player.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Player.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/README.TXT" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/TextReader.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/TextReader.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Time.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Time.ctxt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/failEndTurns.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/help.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/intro.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/package.bluej" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/simpleTimetable.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/time.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/timetable.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Character.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Character.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/time.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/time.txt" afterDir="false" />
-    </list>
+    <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,10 +14,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="371" column="22" selection-start-line="371" selection-start-column="22" selection-end-line="371" selection-end-column="22" />
+            <state relative-caret-position="209">
+              <caret line="591" column="12" lean-forward="true" selection-start-line="591" selection-start-column="12" selection-end-line="591" selection-end-column="12" />
               <folding>
-                <element signature="e#17446#17447#0" expanded="true" />
+                <element signature="e#17444#17445#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -144,7 +105,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543185720059" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543186061928" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -218,7 +179,7 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.18271334" />
+      <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.18271334" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
@@ -226,7 +187,7 @@
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32914045" />
-      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.5125786" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.5125786" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -364,10 +325,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="371" column="22" selection-start-line="371" selection-start-column="22" selection-end-line="371" selection-end-column="22" />
+        <state relative-caret-position="209">
+          <caret line="591" column="12" lean-forward="true" selection-start-line="591" selection-start-column="12" selection-end-line="591" selection-end-column="12" />
           <folding>
-            <element signature="e#17446#17447#0" expanded="true" />
+            <element signature="e#17444#17445#0" expanded="true" />
           </folding>
         </state>
       </provider>

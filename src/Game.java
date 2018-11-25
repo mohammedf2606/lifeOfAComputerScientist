@@ -24,7 +24,6 @@ public class Game {
   private Time time;
   private int turns = 0;
   private float multiplier = 0;
-  private int itemsUsed = 0;
   private int INTPoints = 0;
   private TextReader textReader;
   private ArrayList<Room> roomList = new ArrayList<>();
@@ -371,7 +370,6 @@ public class Game {
    */
   private void addINTPoints(String roomName)
   {
-    float multiplier = (float)player.currentWeight/player.maxWeight;
     switch (roomName) {
       case "lab": case "theatre":
         INTPoints += multiplier * 100;
@@ -539,9 +537,8 @@ public class Game {
           }
           break;
         default:
-          itemsUsed += 1;
           multiplier += (float)allItems.get(itemName).getWeight()/player.maxWeight;
-          System.out.println("You will now gain " + Math.round((multiplier * 100)/itemsUsed)
+          System.out.println("You will now gain " + Math.round((multiplier * 100))
           + "% more INT points from your next timetabled lesson!");
       }
       if (!player.inventory.isEmpty() && !computerUsed) {
