@@ -43,7 +43,7 @@ public class Room {
      * @param direction The direction of the exit.
      * @param neighbor  The room to which the exit leads.
      */
-    public void setExit(String direction, Room neighbor) {
+    void setExit(String direction, Room neighbor) {
         exits.put(direction, neighbor);
     }
 
@@ -52,18 +52,27 @@ public class Room {
      *
      * @param item An item object to place in the room
      */
-    public void addItem(Item item) {
+    void addItem(Item item) {
         items.put(item.getName(), item);
     }
 
     /**
-     * Define an character in a room
+     * Define a character in a room
      *
      * @param character A character object to place in the room
      */
-    public void addCharacter(Character character) {
+    void addCharacter(Character character) {
         characters.put(character.getName(), character);
     }
+
+  /**
+   * Removes a character in a room
+   *
+   * @param character A character object to remove from the room
+   */
+  void removeCharacter(Character character) {
+    characters.remove(character.getName());
+  }
 
     /**
      * @return The name of the room
@@ -77,7 +86,7 @@ public class Room {
      * @return The short description of the room
      * (the one that was defined in the constructor).
      */
-    public String getShortDescription() {
+    String getShortDescription() {
         return description;
     }
 
@@ -88,7 +97,7 @@ public class Room {
      *
      * @return A long description of this room
      */
-    public String getLongDescription() {
+    String getLongDescription() {
         return "You are " + description + ".\n"
         + getExitString() + getItemString() + getCharString();
     }
@@ -115,7 +124,7 @@ public class Room {
      * @param direction The exit's direction.
      * @return The room in the given direction.
      */
-    public Room getExit(String direction) {
+    Room getExit(String direction) {
         return exits.get(direction);
     }
 

@@ -28,11 +28,11 @@ public class Character
       return name;
     }
 
-    public void changeRooms(Room targetRoom) {
+  void changeRooms(Room targetRoom) {
       currentRoom = targetRoom;
     }
 
-    public Room getCurrentRoom() {
+  Room getCurrentRoom() {
         return currentRoom;
     }
 
@@ -44,7 +44,7 @@ public class Character
       defaultResponses.add("Nice to see you. Any questions?");
     }
 
-    public String getDefaultResponse()
+  String getDefaultResponse()
     {
       int index = rng.nextInt(defaultResponses.size());
       return defaultResponses.get(index);

@@ -30,8 +30,8 @@ public class Game {
   private Stack<Room> backStack = new Stack<>();
   private Room theatre, arcade, lab, classroom, pub, library, kitchen, office;
   private Item elaCW, ppaCW;
-  private Character ppaLecturer, elaLecturer;
-  private boolean computerUsed, elaTeacher, ppaTeacher, released, finished, ppaHandedIn, elaHandedIn;
+  private Character ppaLecturer, elaLecturer, cs1Lecturer, fc1Lecturer;
+  private boolean computerUsed, elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher, released, finished, ppaHandedIn, elaHandedIn;
   private HashMap<String, Item> allItems = new HashMap<>();
   private ArrayList<String> charList = new ArrayList<>();
 
@@ -122,17 +122,15 @@ public class Game {
     Item backpack = new Item("backpack", "a bigger backpack", 1);
     Item food = new Item("food", "some food", 400);
 
-    Map<String, Item> tempItemMap = Map.of(ppaBook.getName(), ppaBook,
-            elaBook.getName(), elaBook,
-            coffee.getName(), coffee,
-            elaCW.getName(), elaCW,
-            ppaCW.getName(), ppaCW,
-            notebook.getName(), notebook,
-            drink.getName(), drink,
-            food.getName(), food,
-            backpack.getName(), backpack);
-
-    allItems = new HashMap<>(tempItemMap);
+    allItems.put(ppaBook.getName(), ppaBook);
+    allItems.put(elaBook.getName(), elaBook);
+    allItems.put(coffee.getName(), coffee);
+    allItems.put(elaCW.getName(), elaCW);
+    allItems.put(ppaCW.getName(), ppaCW);
+    allItems.put(notebook.getName(), notebook);
+    allItems.put(drink.getName(), drink);
+    allItems.put(food.getName(), food);
+    allItems.put(backpack.getName(), backpack);
 
     library.addItem(ppaBook);
     library.addItem(elaBook);
@@ -153,15 +151,18 @@ public class Game {
   /**
    * Creates the characters of the game and puts them in the correct place
    */
-  private void createCharacters()
-  {
+  private void createCharacters() {
     ppaLecturer = new Character("kolling");
     elaLecturer = new Character("rodrigues");
+    cs1Lecturer = new Character("howard");
+    fc1Lecturer = new Character("kurucz");
 
     office.addCharacter(ppaLecturer);
     office.addCharacter(elaLecturer);
+    office.addCharacter(cs1Lecturer);
+    office.addCharacter(fc1Lecturer);
 
-    Collections.addAll(charList, ppaLecturer.getName(), elaLecturer.getName());
+    Collections.addAll(charList, ppaLecturer.getName(), elaLecturer.getName(), fc1Lecturer.getName(), cs1Lecturer.getName());
   }
 
 
@@ -178,14 +179,20 @@ public class Game {
     while (!finished) {
       Command command = parser.getCommand();
       finished = processCommand(command);
-      if (finished) { break; }
+      if (finished) {
+        break;
+      }
       turns += 1;
       if (turns == 220) {
         finished = quit(null);
-        if (finished) { break; }
+        if (finished) {
+          break;
+        }
       }
       moveCharacters(ppaLecturer);
       moveCharacters(elaLecturer);
+      moveCharacters(fc1Lecturer);
+      moveCharacters(cs1Lecturer);
       released = checkCWRelease();
       finished = checkCWDeadline();
     }
@@ -308,17 +315,17 @@ public class Game {
         }
       default:
         return false;
-      }
     }
+  }
 
 
   /**
    * Moves the character to a particular room dependant of turns
+   *
    * @param character The character being moved
    */
 
-  private void moveCharacters(Character character)
-  {
+  private void moveCharacters(Character character) {
     switch (character.getName()) {
       case "kolling":
         ppaTeacher = true;
@@ -326,49 +333,94 @@ public class Game {
       case "rodrigues":
         elaTeacher = true;
         break;
+      case "howard":
+        cs1Teacher = true;
+        break;
+      case "kurucz":
+        fc1Teacher = true;
+        break;
     }
     switch (time.getTimeIndex(turns)) {
-      case 3: case 13:
+      case 2:
+      case 12:
+      case 8:
+      case 18:
         if (ppaTeacher) {
           character.changeRooms(theatre);
-          System.out.println(character.getCurrentRoom());
+          theatre.addCharacter(character);
           break;
         }
-      case 4: case 14:
+      case 3:
+      case 13:
         if (elaTeacher) {
           character.changeRooms(theatre);
+          theatre.addCharacter(character);
           break;
         }
-      case 7: case 17:
+      case 4:
+      case 14:
+        if (cs1Teacher) {
+          character.changeRooms(theatre);
+          theatre.addCharacter(character);
+          break;
+        }
+      case 5:
+      case 15:
+        if (cs1Teacher) {
+          character.changeRooms(lab);
+          lab.addCharacter(character);
+          break;
+        }
+      case 6:
+      case 16:
         if (elaTeacher) {
           character.changeRooms(classroom);
+          classroom.addCharacter(character);
+          break;
+        }
+      case 7:
+      case 17:
+        if (fc1Teacher) {
+          character.changeRooms(classroom);
+          classroom.addCharacter(character);
           break;
         }
       case 9: case 19:
-        if (ppaTeacher) {
+        if (fc1Teacher) {
           character.changeRooms(theatre);
+          theatre.addCharacter(character);
           break;
         }
       case 11:
+        if (fc1Teacher) {
+          character.changeRooms(classroom);
+          classroom.addCharacter(character);
+          break;
+        }
+      case 10:
         if (ppaTeacher) {
           character.changeRooms(lab);
+          lab.addCharacter(character);
           break;
         }
       default:
+        roomList.forEach(r -> r.removeCharacter(character));
         character.changeRooms(office);
-        ppaTeacher = false;
-        elaTeacher = false;
         break;
     }
+    ppaTeacher = false;
+    elaTeacher = false;
+    cs1Teacher = false;
+    fc1Teacher = false;
   }
 
   /**
    * Adds INT points to a player's current total.
    */
-  private void addINTPoints(String roomName)
-  {
+  private void addINTPoints(String roomName) {
     switch (roomName) {
-      case "lab": case "theatre":
+      case "lab":
+      case "theatre":
         INTPoints += multiplier * 100;
         break;
       case "classroom":
@@ -376,7 +428,7 @@ public class Game {
     }
   }
 
-    // implementations of user commands:
+  // implementations of user commands:
 
   /**
    * Print out some help information.
@@ -435,66 +487,66 @@ public class Game {
    * Checks whether player and character are in the same room
    * If they are, correct interaction occurs
    */
-   private void playerNPCInteraction(Command command)
-   {
-     String characterName = command.getSecondWord();
-     Set<String> playerItemSet = player.inventory.keySet();
-     if (characterName == null || !charList.contains(characterName)) {
-       System.out.println("Talk to who?");
-     }
-     else {
-       Character character = player.currentRoom.getCharacters().get(characterName);
-       if (player.currentRoom == office && character.getCurrentRoom() == office) {
-         switch (character.getName()) {
-           case "kolling":
+  private void playerNPCInteraction(Command command) {
+    String characterName = command.getSecondWord();
+    Set<String> playerItemSet = player.inventory.keySet();
+    if (characterName == null || !charList.contains(characterName)) {
+      System.out.println("Talk to who?");
+    } else {
+      Character character = player.currentRoom.getCharacters().get(characterName);
+      if (player.currentRoom == office && character.getCurrentRoom() == office) {
+        switch (character.getName()) {
+          case "kolling":
             if (released && playerItemSet.contains("ppaCW")) {
               System.out.println("Prof. Kölling: Well done! You got your coursework in on time!");
               player.inventory.remove("ppaCW");
               ppaHandedIn = true;
-            }
-            else if (released) {
+            } else if (released) {
               System.out.println("Prof. Kölling: Good luck with your coursework!");
-            }
-            else {
+            } else {
               System.out.println(character.getDefaultResponse());
             }
             break;
-           case "rodrigues":
+          case "rodrigues":
             if (released && playerItemSet.contains("elaCW")) {
               System.out.println("Dr. Rodrigues: Well done! You got your coursework in on time!");
               player.inventory.remove("elaCW");
               elaHandedIn = true;
-            }
-            else if (released) {
+            } else if (released) {
               System.out.println("Dr. Rodrigues: Good luck with your coursework!");
-            }
-            else {
+            } else {
               System.out.println(character.getDefaultResponse());
             }
-         }
-       }
-       else if (player.currentRoom == character.getCurrentRoom()) {
-         switch (player.currentRoom.getName()) {
-           case "lab":
+        }
+      } else if (player.currentRoom == character.getCurrentRoom()) {
+        switch (player.currentRoom.getName()) {
+          case "lab":
             addINTPoints("lab");
             System.out.println("You have now attended the lab session!");
             turns += 6;
             break;
-           case "theatre":
+          case "theatre":
             addINTPoints("theatre");
             System.out.println("You just completed a lecture!");
-            turns += 6;
+            if (character.getName().equals("kolling")) {
+              turns += 6;
+            } else {
+              turns += 8;
+            }
             break;
-           case "classroom":
+          case "classroom":
             addINTPoints("classroom");
             System.out.println("You completed a small group tutorial!");
-            turns += 3;
+            turns += 4;
             break;
-         }
-         System.out.println("You have gained " + INTPoints + "INT points!");
-       }
-     }
-   }
+          default:
+            return;
+        }
+        System.out.println("You have gained " + INTPoints + " INT points!");
+        multiplier = 1;
+      }
+    }
+  }
 
 
   /**
@@ -535,13 +587,13 @@ public class Game {
           break;
         case "beer":
           System.out.println("Beer will not help you learn!");
-          multiplier -= (float)allItems.get(itemName).getWeight()/player.maxWeight;
-          System.out.println("You will now lose " + Math.round(((1-multiplier) * 100))
-          + "% of the INT points from your next timetabled lesson!");
+          multiplier -= (float) allItems.get(itemName).getWeight() / player.maxWeight;
+          System.out.println("You will now lose " + Math.round(((1 - multiplier) * 100))
+                  + "% of the INT points from your next timetabled lesson!");
         default:
-          multiplier += (float)allItems.get(itemName).getWeight()/player.maxWeight;
-          System.out.println("You will now gain " + Math.round(((multiplier-1) * 100))
-          + "% more INT points from your next timetabled lesson!");
+          multiplier += (float) allItems.get(itemName).getWeight() / player.maxWeight;
+          System.out.println("You will now gain " + Math.round(((multiplier - 1) * 100))
+                  + "% more INT points from your next timetabled lesson!");
       }
       if (!player.inventory.isEmpty() && !computerUsed) {
         player.currentWeight -= player.inventory.get(itemName).getWeight();
