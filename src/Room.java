@@ -16,7 +16,7 @@ import java.util.Set;
  */
 
 public class Room {
-    public HashMap<String, Item> items;        // stores items of this room.
+    HashMap<String, Item> items;        // stores items of this room.
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
     private String name;

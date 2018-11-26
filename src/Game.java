@@ -31,11 +31,7 @@ public class Game {
   private Room theatre, arcade, lab, classroom, pub, library, kitchen, office;
   private Item elaCW, ppaCW;
   private Character ppaLecturer, elaLecturer;
-  private boolean computerUsed, elaTeacher, ppaTeacher;
-  private boolean released;
-  private boolean finished;
-  private boolean ppaHandedIn = false;
-  private boolean elaHandedIn = false;
+  private boolean computerUsed, elaTeacher, ppaTeacher, released, finished, ppaHandedIn, elaHandedIn;
   private HashMap<String, Item> allItems = new HashMap<>();
   private ArrayList<String> charList = new ArrayList<>();
 
@@ -335,6 +331,7 @@ public class Game {
       case 3: case 13:
         if (ppaTeacher) {
           character.changeRooms(theatre);
+          System.out.println(character.getCurrentRoom());
           break;
         }
       case 4: case 14:
@@ -530,15 +527,20 @@ public class Game {
               System.out.println("Now hand in your coursework to Prof. Kölling!");
             } else {
               player.inventory.put(elaCW.getName(), elaCW);
-              System.out.println("Now hand in your coursework to Prof. Rodrigues!");
+              System.out.println("Now hand in your coursework to Dr. Rodrigues!");
             }
           } else {
             System.out.println("There's nothing to print.");
           }
           break;
+        case "beer":
+          System.out.println("Beer will not help you learn!");
+          multiplier -= (float)allItems.get(itemName).getWeight()/player.maxWeight;
+          System.out.println("You will now lose " + Math.round(((1-multiplier) * 100))
+          + "% of the INT points from your next timetabled lesson!");
         default:
           multiplier += (float)allItems.get(itemName).getWeight()/player.maxWeight;
-          System.out.println("You will now gain " + Math.round((multiplier * 100))
+          System.out.println("You will now gain " + Math.round(((multiplier-1) * 100))
           + "% more INT points from your next timetabled lesson!");
       }
       if (!player.inventory.isEmpty() && !computerUsed) {
