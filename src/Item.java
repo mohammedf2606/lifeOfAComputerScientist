@@ -40,17 +40,7 @@ public class Item {
      * (the one that was defined in the constructor).
      */
     public String getShortDescription() {
-        return description;
-    }
-
-    /**
-     * Return a description of the item in the form:
-     * This is a potato.
-     *
-     * @return A long description of this item
-     */
-    public String getLongDescription() {
-        return "This is" + description;
+        return description + ", " + weight;
     }
 
 }

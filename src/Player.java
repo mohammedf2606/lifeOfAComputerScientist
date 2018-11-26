@@ -9,7 +9,6 @@ import java.util.*;
 public class Player {
     HashMap<String, Item> inventory;
     Integer maxWeight;
-    int INTPoints;
     Room currentRoom;
     Integer currentWeight = 0;
 
@@ -19,7 +18,6 @@ public class Player {
     public Player(Integer maxWeight) {
         this.maxWeight = maxWeight;
         inventory = new HashMap<>();
-        INTPoints = 0;
     }
 
     /**
