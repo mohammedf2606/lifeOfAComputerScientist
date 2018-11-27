@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 /**
  * This class is the main class of the "World of Zuul" application.
@@ -28,7 +29,7 @@ public class Game {
   private TextReader textReader;
   private ArrayList<Room> roomList = new ArrayList<>();
   private Stack<Room> backStack = new Stack<>();
-  private Room theatre, arcade, lab, classroom, pub, library, kitchen, office;
+  private Room theatre, arcade, lab, classroom, pub, library, kitchen, office, hall;
   private Item elaCW, ppaCW;
   private Character ppaLecturer, elaLecturer, cs1Lecturer, fc1Lecturer;
   private boolean computerUsed, elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher, released, finished, ppaHandedIn, elaHandedIn;
@@ -40,7 +41,7 @@ public class Game {
    */
   public Game() {
     time = new Time();
-    player = new Player(5000);
+    player = new Player(3000);
     createRooms();
     parser = new Parser();
   }
@@ -52,6 +53,7 @@ public class Game {
     // create the rooms
     Room outside = new Room("outside", "outside the main entrance of the university");
     library = new Room("library", "in the Maughan Library");
+    hall = new Room("hall", "in the exam hall");
     arcade = new Room("arcade", "in the Arcade");
     theatre = new Room("theatre", "in a lecture theatre");
     pub = new Room("pub", "at The Vault");
@@ -63,7 +65,7 @@ public class Game {
     lab = new Room("lab", "in a computing lab");
     Room random = new Room("random", "in a teleporter");
 
-    Collections.addAll(roomList, outside, theatre, arcade, lab, office, pub, fifth, sixth, library, kitchen, classroom);
+    Collections.addAll(roomList, outside, theatre, arcade, lab, hall, office, pub, fifth, sixth, library, kitchen, classroom);
 
     // initialise room exits
     outside.setExit("north", arcade);
@@ -97,6 +99,9 @@ public class Game {
 
     sixth.setExit("down", fifth);
     sixth.setExit("north", lab);
+    sixth.setExit("south", hall);
+
+    hall.setExit("north", sixth);
 
     lab.setExit("south", sixth);
 
@@ -121,6 +126,7 @@ public class Game {
     Item printer = new Item("printer", "a printer", 0);
     Item backpack = new Item("backpack", "a bigger backpack", 1);
     Item food = new Item("food", "some food", 400);
+    Item exam = new Item("exam", "your final exam paper", 200);
 
     allItems.put(ppaBook.getName(), ppaBook);
     allItems.put(elaBook.getName(), elaBook);
@@ -131,6 +137,7 @@ public class Game {
     allItems.put(drink.getName(), drink);
     allItems.put(food.getName(), food);
     allItems.put(backpack.getName(), backpack);
+    allItems.put(exam.getName(), exam);
 
     library.addItem(ppaBook);
     library.addItem(elaBook);
@@ -141,6 +148,8 @@ public class Game {
     lab.addItem(printer);
 
     pub.addItem(drink);
+
+    hall.addItem(exam);
 
     kitchen.addItem(food);
 
@@ -341,45 +350,37 @@ public class Game {
         break;
     }
     switch (time.getTimeIndex(turns)) {
-      case 2:
-      case 12:
-      case 8:
-      case 18:
+      case 2: case 12: case 8: case 18:
         if (ppaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
           break;
         }
-      case 3:
-      case 13:
+      case 3: case 13:
         if (elaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
           break;
         }
-      case 4:
-      case 14:
+      case 4: case 14:
         if (cs1Teacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
           break;
         }
-      case 5:
-      case 15:
+      case 5: case 15:
         if (cs1Teacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
           break;
         }
-      case 6:
-      case 16:
+      case 6: case 16:
         if (elaTeacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
           break;
         }
-      case 7:
-      case 17:
+      case 7: case 17:
         if (fc1Teacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
@@ -583,6 +584,40 @@ public class Game {
             }
           } else {
             System.out.println("There's nothing to print.");
+          }
+          break;
+        case "exam":
+          if (player.currentRoom == hall && turns > 200) {
+            try {
+              FileReader fr = new FileReader("win.txt");
+              BufferedReader br = new BufferedReader(fr);
+              while (line = br.readLine() != null) {
+                System.out.println(line);
+              }
+            } catch (Exception e) {
+              System.out.println("There was an error trying to open win.txt.");
+            }
+            float finalGrade = (float)INTPoints/2000;
+            if (finalGrade >= 0.7) {
+              System.out.println("First");
+            }
+            else if (finalGrade >= 0.5) {
+              System.out.println("2:1");
+            }
+            else if (finalGrade >= 0.4) {
+              System.out.println("2:2");
+            }
+            else {
+              System.out.println("Third");
+            }
+            finished = true;
+            return;
+          }
+          else if (player.currentRoom != hall) {
+            System.out.println("You can't sit your exam here");
+          }
+          else if (turns < 200) {
+            System.out.println("You can't sit your exam yet. It's not exam week yet.");
           }
           break;
         case "beer":
