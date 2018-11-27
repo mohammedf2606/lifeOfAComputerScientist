@@ -354,60 +354,59 @@ public class Game {
         if (ppaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
-          break;
         }
+        break;
       case 3: case 13:
         if (elaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
-          break;
         }
+        break;
       case 4: case 14:
         if (cs1Teacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
-          break;
         }
+        break;
       case 5: case 15:
         if (cs1Teacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
-          break;
         }
+        break;
       case 6: case 16:
         if (elaTeacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
-          break;
         }
+        break;
       case 7: case 17:
         if (fc1Teacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
-          break;
         }
+        break;
       case 9: case 19:
         if (fc1Teacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
-          break;
         }
+        break;
       case 11:
         if (fc1Teacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
-          break;
         }
+        break;
       case 10:
         if (ppaTeacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
-          break;
         }
+        break;
       default:
         roomList.forEach(r -> r.removeCharacter(character));
         character.changeRooms(office);
-        break;
     }
     ppaTeacher = false;
     elaTeacher = false;
@@ -591,7 +590,8 @@ public class Game {
             try {
               FileReader fr = new FileReader("win.txt");
               BufferedReader br = new BufferedReader(fr);
-              while (line = br.readLine() != null) {
+              String line;
+              while ((line = br.readLine()) != null) {
                 System.out.println(line);
               }
             } catch (Exception e) {
@@ -619,12 +619,13 @@ public class Game {
           else if (turns < 200) {
             System.out.println("You can't sit your exam yet. It's not exam week yet.");
           }
-          break;
+          return;
         case "beer":
           System.out.println("Beer will not help you learn!");
           multiplier -= (float) allItems.get(itemName).getWeight() / player.maxWeight;
           System.out.println("You will now lose " + Math.round(((1 - multiplier) * 100))
                   + "% of the INT points from your next timetabled lesson!");
+          break;
         default:
           multiplier += (float) allItems.get(itemName).getWeight() / player.maxWeight;
           System.out.println("You will now gain " + Math.round(((multiplier - 1) * 100))

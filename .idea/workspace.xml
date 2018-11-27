@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Character.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/simpleTimetable.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/timetable.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/timetable.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -22,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="593" column="51" lean-forward="true" selection-start-line="593" selection-start-column="51" selection-end-line="593" selection-end-column="51" />
+            <state relative-caret-position="286">
+              <caret line="586" column="16" lean-forward="true" selection-start-line="586" selection-start-column="16" selection-end-line="586" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -195,7 +189,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1118" y="0" width="809" height="1087" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Designer" order="0" />
       <window_info id="UI Designer" order="1" />
@@ -210,7 +203,7 @@
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" weight="0.32914045" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.5115304" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.5115304" />
       <window_info anchor="bottom" id="Debug" order="7" weight="0.3997923" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
@@ -335,8 +328,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="593" column="51" lean-forward="true" selection-start-line="593" selection-start-column="51" selection-end-line="593" selection-end-column="51" />
+        <state relative-caret-position="286">
+          <caret line="586" column="16" lean-forward="true" selection-start-line="586" selection-start-column="16" selection-end-line="586" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
