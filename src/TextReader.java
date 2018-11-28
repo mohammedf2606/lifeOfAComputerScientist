@@ -12,6 +12,7 @@ public class TextReader {
 
     /**
      * Constructor for objects of class TextReader
+     * @param command A string that specifies what text file is needed
      */
     public TextReader(String command) {
         try {
@@ -31,6 +32,8 @@ public class TextReader {
                     case "time":
                         fileName = "time.txt";
                         break;
+                    case "win":
+                        fileName = "win.txt";
                 }
             }
             FileReader fileReader = new FileReader(fileName);

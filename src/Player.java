@@ -14,6 +14,7 @@ public class Player {
 
     /**
      * Constructor for objects of class Player
+     * @param maxWeight The maximum weight a player can carry
      */
     public Player(Integer maxWeight) {
         this.maxWeight = maxWeight;
@@ -30,9 +31,11 @@ public class Player {
         Set<String> itemSet = currentRoom.getItems().keySet();
         if (itemSet.isEmpty()) {
             System.out.println("There's nothing to take from this room.");
-        } else if (!itemSet.contains(itemName)) {
+        } 
+        else if (!itemSet.contains(itemName)) {
             System.out.println("Take what?");
-        } else {
+        } 
+        else {
             Item item = currentRoom.getItems().get(itemName);
             Integer weight = item.getWeight();
             if (currentWeight + weight <= maxWeight) {
@@ -54,6 +57,22 @@ public class Player {
         }
     }
 
+    /**
+     * Removes an item from player's inventory.
+     */
+    void dropItem(Command command, HashMap<String,Item> allItems) {
+        String itemName = command.getSecondWord();
+        Set<String> playerItemSet = inventory.keySet();
+        if (!playerItemSet.contains(itemName)) {
+          System.out.println("Drop what?");
+        } 
+        else {
+          inventory.remove(itemName);
+          currentRoom.items.put(itemName, allItems.get(itemName));
+          System.out.println("Dropped " + itemName);
+        }
+    }
+    
     /**
      * Returns items currently in player's inventory
      */

@@ -1,11 +1,9 @@
 import java.util.* ;
-import java.io.*;
 
 /**
- * Write a description of class Actions here.
- *
- * @author (your name)
- * @version (a version number or a date)
+ * Class Actions - executes the commands that are inputted by the user
+ * @author Fahim Mohammed
+ * @version 2018.11.28
  */
 public class Actions {
 
@@ -29,7 +27,6 @@ public class Actions {
    * Here we print some stupid, cryptic message and a list of the
    * command words.
    */
-
   void printHelp() {
     TextReader textReader = new TextReader("help");
     textReader.reader();
@@ -39,7 +36,6 @@ public class Actions {
   /**
    * Implements the deadline command.
    */
-
   void getDeadline(Command command) {
     if (!command.hasSecondWord()) {
       System.out.println("What deadline would you like to check?");
@@ -59,21 +55,6 @@ public class Actions {
       default:
         System.out.println("That is not the name of a module!");
         break;
-    }
-  }
-
-  /**
-   * Removes an item from player's inventory.
-   */
-  void dropItem(Command command) {
-    String itemName = command.getSecondWord();
-    Set<String> playerItemSet = player.inventory.keySet();
-    if (!playerItemSet.contains(itemName)) {
-      System.out.println("Drop what?");
-    } else {
-      player.inventory.remove(itemName);
-      player.currentRoom.items.put(itemName, allItems.get(itemName));
-      System.out.println("Dropped " + itemName);
     }
   }
 
@@ -183,16 +164,8 @@ public class Actions {
           break;
         case "exam":
           if (player.currentRoom == hall && turns > 200) {
-            try {
-              FileReader fr = new FileReader("win.txt");
-              BufferedReader br = new BufferedReader(fr);
-              String line;
-              while ((line = br.readLine()) != null) {
-                System.out.println(line);
-              }
-            } catch (Exception e) {
-              System.out.println("There was an error trying to open win.txt.");
-            }
+            TextReader textReader = new TextReader("win");
+            textReader.reader();
             float finalGrade = (float) INTPoints / 2000;
             if (finalGrade >= 0.7) {
               System.out.println("First");

@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="Fixed previous bug; TODO finish end goal">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/package.bluej" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/lifeOfAComputerScientist/package.bluej" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Character.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Character.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandWords.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandWords.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandWords.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CommandWords.ctxt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Game.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Game.ctxt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Item.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.ctxt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Room.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Room.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TextReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/TextReader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Time.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Time.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/package.bluej" beforeDir="false" afterPath="$PROJECT_DIR$/src/package.bluej" afterDir="false" />
-    </list>
+    <list default="true" id="bf2fd535-9ef3-454a-97fe-fa8b2b917bc3" name="Default Changelist" comment="Fixed previous bug; TODO finish end goal" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,8 +107,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1116" />
-    <option name="width" value="811" />
+    <option name="x" value="1097" />
+    <option name="width" value="830" />
     <option name="height" value="1087" />
   </component>
   <component name="ProjectView">

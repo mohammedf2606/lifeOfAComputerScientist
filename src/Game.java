@@ -1,24 +1,18 @@
 import java.util.*;
 
 /**
- * This class is the main class of the "World of Zuul" application.
- * "World of Zuul" is a very simple, text based adventure game.  Users
- * can walk around some scenery. That's all. It should really be extended
- * to make it more interesting!
- * <p>
- * To play this game, create an instance of this class and call the "play"
- * method.
- * <p>
- * This main class creates and initialises all the others: it creates all
- * rooms, creates the parser and starts the game.  It also evaluates and
- * executes the commands that the parser returns.
+ * Class Game - the part that initailises the game and contains the method that runs the code
+ * 
+ * This class creates and initialises all the others: it creates all
+ * rooms, creates the parser and starts the game.  It also evaluates 
+ * the commands that the parser returns.
  *
- * @author Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Michael Kölling, David J. Barnes and Fahim Mohammed
+ * @version 2018.11.28
  */
 
 public class Game extends Actions {
-  
+    
   private Room theatre, arcade, lab, classroom, pub, library, kitchen;
   private boolean elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher;
   
@@ -190,6 +184,7 @@ public class Game extends Actions {
       finished = checkCWDeadline();
     }
     System.out.println("\nThank you for playing. Good bye.");
+    System.out.print('\u000C');
   }
 
   /**
@@ -237,7 +232,7 @@ public class Game extends Actions {
           player.takeItem(command);
           break;
         case "drop":
-          dropItem(command);
+          player.dropItem(command, allItems);
           break;
         case "items":
           System.out.println(player.getInventory());
@@ -263,7 +258,6 @@ public class Game extends Actions {
   /**
    * Checks whether each coursework has been released
    */
-
   private boolean checkCWRelease() {
     if (turns == 50) {
       System.out.println("The PPA coursework has been released.");
@@ -289,7 +283,6 @@ public class Game extends Actions {
    * Checks whether the deadlines of each coursework has passed.
    * If it has, then the game ends if coursework has not been handed in.
    */
-
   private boolean checkCWDeadline() {
     switch (turns) {
       case 100:
@@ -317,7 +310,6 @@ public class Game extends Actions {
    *
    * @param character The character being moved
    */
-
   private void moveCharacters(Character character) {
     boolean goToOffice = false;
     switch (character.getName()) {
@@ -335,10 +327,7 @@ public class Game extends Actions {
         break;
     }
     switch (time.getTimeIndex(turns)) {
-      case 2:
-      case 12:
-      case 8:
-      case 18:
+      case 2: case 12: case 8: case 18:
         if (ppaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
@@ -346,8 +335,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 3:
-      case 13:
+      case 3: case 13:
         if (elaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
@@ -355,8 +343,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 4:
-      case 14:
+      case 4: case 14:
         if (cs1Teacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
@@ -364,8 +351,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 5:
-      case 15:
+      case 5: case 15:
         if (cs1Teacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
@@ -373,8 +359,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 6:
-      case 16:
+      case 6: case 16:
         if (elaTeacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
@@ -382,8 +367,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 7:
-      case 17:
+      case 7: case 17:
         if (fc1Teacher) {
           character.changeRooms(classroom);
           classroom.addCharacter(character);
@@ -391,8 +375,7 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
-      case 9:
-      case 19:
+      case 9: case 19:
         if (fc1Teacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);

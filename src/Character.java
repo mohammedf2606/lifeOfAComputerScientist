@@ -12,24 +12,42 @@ public class Character
   private String name;
   private Room currentRoom;
   private ArrayList<String> defaultResponses;
-  private Random rng;
+  private Random rng = new Random();
 
   /**
    * Constructor for objects of class Character
+   * @param name Gives a character its name
    */
   public Character(String name) {
     this.name = name;
     defaultResponses = new ArrayList<>();
     fillDefaultResponses();
-    rng = new Random();
   }
 
-  public String getName() { return name; }
+  /**
+   * 
+   */
+  public String getName() { 
+      return name; 
+  }
 
-  void changeRooms(Room targetRoom) { currentRoom = targetRoom; }
+  /**
+   * 
+   */
+  void changeRooms(Room targetRoom) { 
+      currentRoom = targetRoom; 
+  }
 
-  Room getCurrentRoom() { return currentRoom; }
+  /**
+   * 
+   */
+  Room getCurrentRoom() { 
+      return currentRoom; 
+  }
 
+  /**
+   * 
+   */
   private void fillDefaultResponses()
   {
     defaultResponses.add("Hey! How are you doing?");
@@ -38,6 +56,9 @@ public class Character
     defaultResponses.add("Nice to see you. Any questions?");
   }
 
+  /**
+   * 
+   */
   String getDefaultResponse()
   {
     int index = rng.nextInt(defaultResponses.size());
