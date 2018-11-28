@@ -87,7 +87,7 @@ public class Room {
      * (the one that was defined in the constructor).
      */
     String getShortDescription() {
-        return description;
+      return description;
     }
 
     /**
@@ -111,9 +111,7 @@ public class Room {
     private String getExitString() {
         StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
-        for (String exit : keys) {
-            returnString.append(" ").append(exit);
-        }
+        keys.forEach(e -> returnString.append(" ").append(e));
         return returnString.toString();
     }
 
@@ -125,7 +123,7 @@ public class Room {
      * @return The room in the given direction.
      */
     Room getExit(String direction) {
-        return exits.get(direction);
+      return exits.get(direction);
     }
 
     /**
@@ -140,9 +138,7 @@ public class Room {
         }
         StringBuilder returnString = new StringBuilder("\nItems:");
         Set<String> keys = items.keySet();
-        for (String item : keys) {
-            returnString.append(" ").append(item);
-        }
+        keys.forEach(i -> returnString.append(" ").append(i));
         return returnString.toString();
     }
 
@@ -158,9 +154,7 @@ public class Room {
         }
         StringBuilder returnString = new StringBuilder("\nCharacters:");
         Set<String> keys = characters.keySet();
-        for (String chars : keys) {
-            returnString.append(" ").append(chars);
-        }
+        keys.forEach(c -> returnString.append(" ").append(c));
         return returnString.toString();
     }
 

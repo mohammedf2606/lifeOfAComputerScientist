@@ -41,7 +41,8 @@ public class Player {
             if (currentWeight + weight <= maxWeight) {
                 if (weight == 0) {
                     System.out.println("You can't pick that up!");
-                } else {
+                }
+                else {
                     if (itemName.equals("backpack")) {
                         System.out.println("Looks like someone left their bag after the lecture. It's bigger than yours.");
                         System.out.println("Maybe you can make USE of it...\n");
@@ -49,9 +50,10 @@ public class Player {
                     inventory.put(itemName, item);
                     currentRoom.items.remove(itemName);
                     currentWeight += weight;
-                    System.out.println("Grabbed " + itemName);
+                    System.out.println("Grabbed " + itemName + "\nWeight: " + item.getWeight() + " g");
                 }
-            } else {
+            }
+            else {
                 System.out.println("No more space in bag. You gotta drop something...");
             }
         }
@@ -80,9 +82,7 @@ public class Player {
     {
         StringBuilder returnString = new StringBuilder("Inventory:");
         Set<String> keys = inventory.keySet();
-        for (String item : keys) {
-            returnString.append(" ").append(item);
-        }
+        keys.forEach(i -> returnString.append(" ").append(i));
         return returnString + "\nTotal weight: " + currentWeight.toString()
                 + " g" + "\nMax weight: " + maxWeight.toString() + " g";
     }
