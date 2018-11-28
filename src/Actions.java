@@ -123,7 +123,7 @@ public class Actions {
           default:
             return;
         }
-        System.out.println("You have gained " + INTPoints + " INT points!");
+        System.out.println("You currently have " + INTPoints + " INT points!");
         multiplier = 1;
       }
     }
