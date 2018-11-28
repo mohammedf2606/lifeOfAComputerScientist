@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Game extends Actions {
     
-  private Room theatre, arcade, lab, classroom, pub, library, kitchen;
+  private Room theatre, arcade, lab, classroom, pub, library, kitchen, outside, fifth, sixth;
   private boolean elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher;
   
   /**
@@ -31,17 +31,17 @@ public class Game extends Actions {
    */
   private void createRooms() {
     // create the rooms
-    Room outside = new Room("outside", "outside the main entrance of the university");
+    outside = new Room("outside", "outside the main entrance of the university");
     library = new Room("library", "in the Maughan Library");
     hall = new Room("hall", "in the exam hall");
     arcade = new Room("arcade", "in the Arcade");
     theatre = new Room("theatre", "in a lecture theatre");
     pub = new Room("pub", "at The Vault");
     kitchen = new Room("kitchen", "in the canteen");
-    Room fifth = new Room("fifth", "on the fifth floor of Bush House");
+    fifth = new Room("fifth", "on the fifth floor of Bush House");
     office = new Room("office", "in the Informatics departmental office");
     classroom = new Room("classroom", "in a classroom");
-    Room sixth = new Room("sixth", "on the sixth floor of Bush House");
+    sixth = new Room("sixth", "on the sixth floor of Bush House");
     lab = new Room("lab", "in a computing lab");
     Room random = new Room("random", "in a teleporter");
 
@@ -146,12 +146,9 @@ public class Game extends Actions {
     Character cs1Lecturer = new Character("howard");
     Character fc1Lecturer = new Character("kurucz");
 
-    office.addCharacter(ppaLecturer);
-    office.addCharacter(elaLecturer);
-    office.addCharacter(cs1Lecturer);
-    office.addCharacter(fc1Lecturer);
-
     Collections.addAll(charList, ppaLecturer, elaLecturer, fc1Lecturer, cs1Lecturer);
+    charList.forEach(c -> office.addCharacter(c));
+    charList.forEach(c -> c.changeRooms(office));
   }
 
 
@@ -399,6 +396,8 @@ public class Game extends Actions {
           goToOffice = true;
         }
         break;
+      default:
+        goToOffice = true;
     }
     if (goToOffice) {
       character.changeRooms(office);

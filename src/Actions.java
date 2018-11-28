@@ -78,10 +78,11 @@ public class Actions {
               System.out.println("Prof. Kölling: Well done! You got your coursework in on time!");
               player.inventory.remove("ppaCW");
               ppaHandedIn = true;
-            } else if (released) {
+              break;
+            }
+            else if (released) {
               System.out.println("Prof. Kölling: Good luck with your coursework!");
-            } else {
-              System.out.println(character.getDefaultResponse());
+              break;
             }
             break;
           case "rodrigues":
@@ -89,11 +90,14 @@ public class Actions {
               System.out.println("Dr. Rodrigues: Well done! You got your coursework in on time!");
               player.inventory.remove("elaCW");
               elaHandedIn = true;
-            } else if (released) {
-              System.out.println("Dr. Rodrigues: Good luck with your coursework!");
-            } else {
-              System.out.println(character.getDefaultResponse());
+              break;
             }
+            else if (released) {
+              System.out.println("Dr. Rodrigues: Good luck with your coursework!");
+              break;
+            }
+          default:
+            System.out.println(character.getDefaultResponse());
         }
       } else if (player.currentRoom == character.getCurrentRoom()) {
         switch (player.currentRoom.getName()) {

@@ -16,54 +16,54 @@ import java.util.Set;
  */
 
 public class Room {
-    HashMap<String, Item> items;        // stores items of this room.
-    private String description;
-    private HashMap<String, Room> exits;        // stores exits of this room.
-    private String name;
-    private HashMap<String, Character> characters;
+  HashMap<String, Item> items;        // stores items of this room.
+  private String description;
+  private HashMap<String, Room> exits;        // stores exits of this room.
+  private String name;
+  private HashMap<String, Character> characters;
 
-    /**
-     * Create a room described "description". Initially, it has
-     * no exits. "description" is something like "a kitchen" or
-     * "an open court yard".
-     *
-     * @param description The room's description.
-     */
-    public Room(String name, String description) {
-        this.name = name;
-        this.description = description;
-        exits = new HashMap<>();
-        items = new HashMap<>();
-        characters = new HashMap<>();
-    }
+  /**
+   * Create a room described "description". Initially, it has
+   * no exits. "description" is something like "a kitchen" or
+   * "an open court yard".
+   *
+   * @param description The room's description.
+   */
+  public Room(String name, String description) {
+      this.name = name;
+      this.description = description;
+      exits = new HashMap<>();
+      items = new HashMap<>();
+      characters = new HashMap<>();
+  }
 
-    /**
-     * Define an exit from this room.
-     *
-     * @param direction The direction of the exit.
-     * @param neighbor  The room to which the exit leads.
-     */
-    void setExit(String direction, Room neighbor) {
-        exits.put(direction, neighbor);
-    }
+  /**
+   * Define an exit from this room.
+   *
+   * @param direction The direction of the exit.
+   * @param neighbor  The room to which the exit leads.
+   */
+  void setExit(String direction, Room neighbor) {
+      exits.put(direction, neighbor);
+  }
 
-    /**
-     * Define an item in a room
-     *
-     * @param item An item object to place in the room
-     */
-    void addItem(Item item) {
-        items.put(item.getName(), item);
-    }
+  /**
+   * Define an item in a room
+   *
+   * @param item An item object to place in the room
+   */
+  void addItem(Item item) {
+      items.put(item.getName(), item);
+  }
 
-    /**
-     * Define a character in a room
-     *
-     * @param character A character object to place in the room
-     */
-    void addCharacter(Character character) {
-        characters.put(character.getName(), character);
-    }
+  /**
+   * Define a character in a room
+   *
+   * @param character A character object to place in the room
+   */
+  void addCharacter(Character character) {
+    characters.put(character.getName(), character);
+  }
 
   /**
    * Removes a character in a room
