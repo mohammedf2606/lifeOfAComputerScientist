@@ -214,14 +214,6 @@ public class Game extends Creator {
         break;
       case 4: case 14:
         if (cs1Teacher) {
-          character.changeRooms(theatre);
-          theatre.addCharacter(character);
-        } else {
-          goToOffice = true;
-        }
-        break;
-      case 5: case 15:
-        if (cs1Teacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
         } else {
