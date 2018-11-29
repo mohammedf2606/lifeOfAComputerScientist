@@ -67,10 +67,10 @@ public class Actions {
     Set<String> playerItemSet = player.inventory.keySet();
     ArrayList<String> charNames = new ArrayList<>();
     charList.forEach(c -> charNames.add(c.getName()));
-    if (characterName == null || !charNames.contains(characterName)) {
+    Character character = player.currentRoom.getCharacters().get(characterName);
+    if (character == null || !charNames.contains(characterName)) {
       System.out.println("Talk to who?");
     } else {
-      Character character = player.currentRoom.getCharacters().get(characterName);
       if (player.currentRoom == office && character.getCurrentRoom() == office) {
         switch (character.getName()) {
           case "kolling":

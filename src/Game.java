@@ -253,7 +253,7 @@ public class Game extends Creator {
         }
         break;
       case 10:
-        if (ppaTeacher) {
+        if (cs1Teacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
         } else {
