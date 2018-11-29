@@ -247,9 +247,7 @@ public class Actions {
     } else {
       if (nextRoom.getName().equals("random")) {
         System.out.println("You are " + nextRoom.getShortDescription() + ".\n");
-        while (nextRoom.getName().equals("random")) {
-          nextRoom = roomList.get(randomiser.nextInt(roomList.size()));
-        }
+        nextRoom = roomList.get(randomiser.nextInt(roomList.size()));
       }
       Room previousRoom = player.currentRoom;
       backStack.push(previousRoom);
