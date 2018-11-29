@@ -1,6 +1,6 @@
 Class documentation
 <---- javadoc command: ---->
-/Applications/BlueJ.app/Contents/JDK/Home/bin/javadoc
+/usr/java/jdk1.8.0_144/bin/javadoc
 -author
 -version
 -nodeprecated
@@ -13,25 +13,26 @@ Class documentation
 -source
 1.8
 -classpath
-/Applications/BlueJ.app/Contents/Resources/Java/bluejcore.jar:/Applications/BlueJ.app/Contents/Resources/Java/junit-4.11.jar:/Applications/BlueJ.app/Contents/Resources/Java/hamcrest-core-1.3.jar:/Applications/BlueJ.app/Contents/Resources/Java/lang-stride.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-core.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-device.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-gpio-extension.jar:/Applications/BlueJ.app/Contents/Resources/Java/userlib/pi4j-service.jar:/Users/family/Documents/GitHub/lifeOfAComputerScientist/src
+/opt/bluej/lib/bluejcore.jar:/opt/bluej/lib/junit-4.11.jar:/opt/bluej/lib/hamcrest-core-1.3.jar:/opt/bluej/lib/lang-stride.jar:/opt/bluej/lib/userlib/pi4j-gpio-extension.jar:/opt/bluej/lib/userlib/pi4j-core.jar:/opt/bluej/lib/userlib/pi4j-device.jar:/opt/bluej/lib/userlib/pi4j-service.jar:/home/k1631585/Documents/github/lifeOfAComputerScientist/src
 -d
-/Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/doc
 -encoding
 UTF-8
 -charset
 UTF-8
-/Users/family/Documents/GitHub/lifeOfAComputerScientist/src/Actions.java
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java
 <---- end of javadoc command ---->
-Loading source file /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/Actions.java...
-Constructing Javadoc information...
-Standard Doclet version 1.8.0_181
-Building tree for all the packages and classes...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/Actions.html...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/package-frame.html...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/package-summary.html...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/constant-values.html...
-Building index for all the packages and classes...
-Building index for all classes...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/allclasses-frame.html...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/allclasses-noframe.html...
-Generating /Users/family/Documents/GitHub/lifeOfAComputerScientist/src/doc/index.html...
+Loading source file /home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java...
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java:123: error: not a statement
+    }ide-java
+        ^
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java:123: error: ';' expected
+    }ide-java
+             ^
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java:155: error: not a statement
+  private boolean checkCWDeadline() {ide-java
+                                        ^
+/home/k1631585/Documents/github/lifeOfAComputerScientist/src/Game.java:155: error: ';' expected
+  private boolean checkCWDeadline() {ide-java
+                                             ^
+4 errors

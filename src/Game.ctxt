@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Game
-comment0.text=\n\ Class\ Game\ -\ the\ part\ that\ initailises\ the\ game\ and\ contains\ the\ method\ that\ runs\ the\ code\n\ \n\ This\ class\ creates\ and\ initialises\ all\ the\ others\:\ it\ creates\ all\n\ rooms,\ creates\ the\ parser\ and\ starts\ the\ game.\ \ It\ also\ evaluates\ \n\ the\ commands\ that\ the\ parser\ returns.\n\n\ @author\ Michael\ K\u00F6lling,\ David\ J.\ Barnes\ and\ Fahim\ Mohammed\n\ @version\ 2018.11.28\n
+comment0.text=\n\ Class\ Game\ -\ the\ part\ that\ initailises\ the\ game\ and\ contains\ the\ method\ that\ runs\ the\ code\n\n\ This\ class\ creates\ and\ initialises\ all\ the\ others\:\ it\ creates\ all\n\ rooms,\ creates\ the\ parser\ and\ starts\ the\ game.\ \ It\ also\ evaluates\n\ the\ commands\ that\ the\ parser\ returns.\n\n\ @author\ Michael\ K\u00F6lling,\ David\ J.\ Barnes\ and\ Fahim\ Mohammed\n\ @version\ 2018.11.28\n
 comment1.params=
 comment1.target=Game()
 comment1.text=\n\ Create\ the\ game\ and\ initialise\ its\ internal\ map.\n

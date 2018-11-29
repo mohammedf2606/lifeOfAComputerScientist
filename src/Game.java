@@ -1,8 +1,8 @@
 /**
  * Class Game - the part that initailises the game and contains the method that runs the code
- * 
+ *
  * This class creates and initialises all the others: it creates all
- * rooms, creates the parser and starts the game.  It also evaluates 
+ * rooms, creates the parser and starts the game.  It also evaluates
  * the commands that the parser returns.
  *
  * @author Michael Kölling, David J. Barnes and Fahim Mohammed
@@ -12,7 +12,7 @@
 public class Game extends Creator {
 
   private boolean elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher;
-  
+
   /**
    * Create the game and initialise its internal map.
    */
@@ -281,4 +281,3 @@ public class Game extends Creator {
     fc1Teacher = false;
   }
 }
-

@@ -1,16 +1,16 @@
 #BlueJ class context
 comment0.target=Player
-comment0.text=\r\n\ Class\ Player\ -\ creates\ a\ player\ in\ the\ game\r\n\r\n\ @author\ Fahim\ Mohammed\r\n\ @version\ 2018.11.17\r\n
+comment0.text=\n\ Class\ Player\ -\ creates\ a\ player\ in\ the\ game\n\n\ @author\ Fahim\ Mohammed\n\ @version\ 2018.11.17\n
 comment1.params=maxWeight
 comment1.target=Player(java.lang.Integer)
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Player\r\n\ @param\ maxWeight\ The\ maximum\ weight\ a\ player\ can\ carry\r\n
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Player\n\ @param\ maxWeight\ The\ maximum\ weight\ a\ player\ can\ carry\n
 comment2.params=command
 comment2.target=void\ takeItem(Command)
-comment2.text=\r\n\ Adds\ an\ item\ to\ player's\ inventory.\r\n\ If\ max\ weight\ is\ exceeded,\ error\ message\ shown.\r\n
+comment2.text=\n\ Adds\ an\ item\ to\ player's\ inventory.\n\ If\ max\ weight\ is\ exceeded,\ error\ message\ shown.\n
 comment3.params=command\ allItems
 comment3.target=void\ dropItem(Command,\ java.util.HashMap)
-comment3.text=\r\n\ Removes\ an\ item\ from\ player's\ inventory.\r\n
+comment3.text=\n\ Removes\ an\ item\ from\ player's\ inventory.\n
 comment4.params=
 comment4.target=java.lang.String\ getInventory()
-comment4.text=\r\n\ Returns\ items\ currently\ in\ player's\ inventory\r\n
+comment4.text=\n\ Returns\ items\ currently\ in\ player's\ inventory\n
 numComments=5
