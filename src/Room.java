@@ -130,13 +130,13 @@ public class Room {
    * @return Details of the room's items.
    */
   private String getItemString() {
-      if (items.isEmpty()) {
-          return "";
-      }
-      StringBuilder returnString = new StringBuilder("\nItems:");
-      Set<String> keys = items.keySet();
-      keys.forEach(i -> returnString.append(" ").append(i));
-      return returnString.toString();
+    if (items.isEmpty()) {
+        return "";
+    }
+    StringBuilder returnString = new StringBuilder("\nItems:");
+    Set<String> keys = items.keySet();
+    keys.forEach(i -> returnString.append(" ").append(i));
+    return returnString.toString();
   }
 
   /**
@@ -146,13 +146,13 @@ public class Room {
    * @return Details of the room's characters.
    */
   private String getCharString() {
-      if (characters.isEmpty()) {
-          return "";
-      }
-      StringBuilder returnString = new StringBuilder("\nCharacters:");
-      Set<String> keys = characters.keySet();
-      keys.forEach(c -> returnString.append(" ").append(c));
-      return returnString.toString();
+    if (characters.isEmpty()) {
+        return "";
+    }
+    StringBuilder returnString = new StringBuilder("\nCharacters:");
+    Set<String> keys = characters.keySet();
+    keys.forEach(c -> returnString.append(" ").append(c));
+    return returnString.toString();
   }
 
   /**

@@ -1,10 +1,10 @@
 import java.util.*;
 
 /**
- * Write a description of class Character here.
+ * Class Character - a character in the game
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Fahim Mohammed
+ * @version 2018.11.29
  */
 public class Character
 {
@@ -25,28 +25,29 @@ public class Character
   }
 
   /**
-   * 
+   * Returns the name of a character
    */
-  public String getName() { 
-      return name; 
+  public String getName() {
+      return name;
   }
 
   /**
-   * 
+   * Changes the room the character currently is in
+   * @param targetRoom The room the character is moving to
    */
-  void changeRooms(Room targetRoom) { 
-      currentRoom = targetRoom; 
+  void changeRooms(Room targetRoom) {
+      currentRoom = targetRoom;
   }
 
   /**
-   * 
+   * Returns the room the character is currently in
    */
-  Room getCurrentRoom() { 
-      return currentRoom; 
+  Room getCurrentRoom() {
+      return currentRoom;
   }
 
   /**
-   * 
+   * Adds a number of default responses to a list
    */
   private void fillDefaultResponses()
   {
@@ -57,7 +58,7 @@ public class Character
   }
 
   /**
-   * 
+   * Returns a random string from a list of default responses
    */
   String getDefaultResponse()
   {

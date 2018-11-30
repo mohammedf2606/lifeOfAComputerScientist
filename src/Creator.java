@@ -1,5 +1,12 @@
 import java.util.Collections;
 
+/**
+ * Class Creator - creates all the rooms in the GAME
+ * @author Fahim Mohammed
+ * @version 2018.11.29
+ */
+
+
 class Creator extends Actions {
   Room theatre, lab, classroom;
   private Room arcade;

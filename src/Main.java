@@ -1,8 +1,8 @@
 /**
- * Write a description of class GameMain here.
+ * Class Main - runs the code (i.e. contains the main function)
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Fahim Mohammed
+ * @version 2018.11.29
  */
 public class Main {
     public static void main(String[] args) {

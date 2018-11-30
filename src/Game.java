@@ -11,7 +11,7 @@
 
 public class Game extends Creator {
 
-  private boolean elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher;
+  private boolean elaTeacher, ppaTeacher, cs1Teacher, fc1Teacher, releasedOnce, deadlineOnce;
 
   /**
    * Create the game and initialise its internal map.
@@ -128,15 +128,17 @@ public class Game extends Creator {
    * Checks whether each coursework has been released
    */
   private boolean checkCWRelease() {
-    if (turns == 50) {
-      System.out.println("The PPA coursework has been released.");
+    if (turns >= 50 && !releasedOnce) {
+      System.out.println("\nThe PPA coursework has been released.");
       System.out.println("Use the lab computers to complete it before the deadline.");
-      System.out.println("To check the deadline, type 'deadline ppa'.");
+      System.out.println("To check the deadline, type 'deadline ppa'.\n");
+      releasedOnce = true;
       return true;
-    } else if (turns == 120) {
-      System.out.println("The ELA coursework has been released.");
+    } else if (turns >= 120 && !releasedOnce) {
+      System.out.println("\nThe ELA coursework has been released.");
       System.out.println("Use the lab computers to complete it before the deadline.");
-      System.out.println("To check the deadline, type 'deadline ela'.");
+      System.out.println("To check the deadline, type 'deadline ela'.\n");
+      releasedOnce = true;
       return true;
     } else if (turns > 100 && turns < 120) {
       return false;
@@ -153,24 +155,25 @@ public class Game extends Creator {
    * If it has, then the game ends if coursework has not been handed in.
    */
   private boolean checkCWDeadline() {
-    switch (turns) {
-      case 100:
-        System.out.println("The deadline for the PPA coursework has passed.");
-        if (!ppaHandedIn) {
-          System.out.println("You failed to hand in your PPA coursework on time.");
-          System.out.println("GAME OVER!");
-          return true;
-        }
-      case 170:
-        System.out.println("The deadline for the ELA coursework has passed.");
-        if (!elaHandedIn) {
-          System.out.println("You failed to hand in your ELA coursework on time.");
-          System.out.println("GAME OVER!");
-          return true;
-        }
-      default:
-        return false;
+    if (turns >= 100 && !deadlineOnce) {
+      System.out.println("\nThe deadline for the PPA coursework has passed.");
+      if (!ppaHandedIn) {
+        System.out.println("You failed to hand in your PPA coursework on time.");
+        System.out.println("GAME OVER!");
+        return true;
+      }
+      deadlineOnce = true;
     }
+    else if (turns >= 170 && !deadlineOnce) {
+      System.out.println("\nThe deadline for the ELA coursework has passed.");
+      if (!elaHandedIn) {
+        System.out.println("You failed to hand in your ELA coursework on time.");
+        System.out.println("GAME OVER!");
+        return true;
+      }
+      deadlineOnce = true;
+    }
+    return false;
   }
 
 
@@ -196,7 +199,7 @@ public class Game extends Creator {
         break;
     }
     switch (time.getTimeIndex(turns)) {
-      case 2: case 12: case 8: case 18:
+      case 2: case 12:
         if (ppaTeacher) {
           character.changeRooms(theatre);
           theatre.addCharacter(character);
@@ -236,6 +239,14 @@ public class Game extends Creator {
           goToOffice = true;
         }
         break;
+      case 8: case 18:
+        if (cs1Teacher) {
+          character.changeRooms(theatre);
+          theatre.addCharacter(character);
+        } else {
+          goToOffice = true;
+        }
+        break;
       case 9: case 19:
         if (fc1Teacher) {
           character.changeRooms(theatre);
@@ -246,14 +257,14 @@ public class Game extends Creator {
         break;
       case 11:
         if (fc1Teacher) {
-          character.changeRooms(classroom);
-          classroom.addCharacter(character);
+          character.changeRooms(theatre);
+          theatre.addCharacter(character);
         } else {
           goToOffice = true;
         }
         break;
       case 10:
-        if (cs1Teacher) {
+        if (ppaTeacher) {
           character.changeRooms(lab);
           lab.addCharacter(character);
         } else {

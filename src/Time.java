@@ -1,7 +1,7 @@
 import java.io.*;
 
 /**
- * Write a description of class Time here.
+ * Class Time - tracks the in game time and prints it
  *
  * @author Fahim Mohammed
  * @version 2018.11.19
